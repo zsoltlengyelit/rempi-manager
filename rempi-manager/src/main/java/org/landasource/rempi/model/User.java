@@ -3,6 +3,8 @@
  */
 package org.landasource.rempi.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -20,7 +23,10 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = User.USERNAME_FIELD, name = "unique_username"))
-public class User {
+public class User implements Serializable {
+
+	/** Generated. */
+	private static final long serialVersionUID = -3410626536412113511L;
 
 	public static final String USERNAME_FIELD = "username";
 
@@ -88,7 +94,7 @@ public class User {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (Hibernate.getClass(this) != Hibernate.getClass(obj)) {
 			return false;
 		}
 		final User other = (User) obj;

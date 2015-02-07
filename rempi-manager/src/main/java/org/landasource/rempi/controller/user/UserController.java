@@ -1,71 +1,68 @@
 package org.landasource.rempi.controller.user;
 
-import javax.validation.Valid;
-
+import org.landasource.rempi.core.PasswordUtil;
+import org.landasource.rempi.core.controller.CrudController;
 import org.landasource.rempi.model.User;
 import org.landasource.rempi.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends CrudController<User, UserForm> {
 
 	@Autowired
 	private UserRepo userRepo;
 
-	@RequestMapping({ "", "/" })
-	public String index(final ModelMap modelMap) {
-
-		final Iterable<User> users = userRepo.findAll();
-
-		modelMap.put("users", users);
-
-		return "user/index";
+	@Override
+	protected CrudRepository<User, Long> getRepo() {
+		return userRepo;
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String add(final ModelMap modelMap) {
-
-		modelMap.put("user", new UserForm());
-		return "user/add";
+	@Override
+	protected String getControllerName() {
+		return "user";
 	}
 
-	@Transactional
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String save(@Valid final UserForm form, final BindingResult result, final ModelMap modelMap) {
-
-		modelMap.put("result", result);
-		modelMap.put("user", form);
-
-		if (result.hasErrors()) {
-
-			return "user/add";
-		}
-
+	@Override
+	protected void validateFormAtSave(final UserForm form, final BindingResult result) {
 		final User user2 = userRepo.findByUsername(form.getUsername());
 		if (null != user2) {
 			result.reject("username-duplicate", "User exists");
-
-			return "user/add";
 		}
 
-		final User user = new User();
-		user.setFullName(form.getFullName());
-		user.setUsername(form.getUsername());
+		if (StringUtils.isEmpty(form.getPassword())) {
+			result.rejectValue("password", "empty-pass", "Required");
+		}
+	}
 
-		final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		final String hashedPassword = passwordEncoder.encode(form.getPassword());
-		user.setPasswordHash(hashedPassword);
+	@Override
+	protected void validateFormAtUpdate(final Long id, final UserForm form, final BindingResult result) {
 
-		userRepo.save(user);
+		final User user2 = userRepo.findByUsername(form.getUsername());
+		if (null != user2 && !user2.getId().equals(id)) {
+			result.reject("username-duplicate", "User exists");
+		}
 
-		return "redirect:/user";
+	}
+
+	@Override
+	protected void fillForm(final UserForm form, final User model) {
+		form.setFullName(model.getFullName());
+		form.setUsername(model.getUsername());
+	}
+
+	@Override
+	protected void fillModel(final UserForm form, final User model) {
+		model.setFullName(form.getFullName());
+		model.setUsername(form.getUsername());
+		if (!StringUtils.isEmpty(form.getPassword())) {
+			model.setPasswordHash(PasswordUtil.makeHash(form.getPassword()));
+		}
+
 	}
 }

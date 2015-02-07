@@ -3,6 +3,7 @@ package org.landasource.rempi.controller.user;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.landasource.rempi.core.form.CreateValidation;
 
 /**
  *
@@ -15,8 +16,8 @@ public class UserForm {
 	@NotEmpty
 	private String username;
 
-	@NotNull
-	@NotEmpty
+	@NotNull(groups = CreateValidation.class)
+	@NotEmpty(groups = CreateValidation.class)
 	private String password;
 
 	@NotNull
@@ -33,10 +34,6 @@ public class UserForm {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public void setPassword(final String password) {
-		this.password = password;
 	}
 
 	public String getFullName() {

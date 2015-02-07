@@ -12,15 +12,24 @@
                <th>ID</th>
                <th>Full name</th>
                <th>Username</th>
+               <th></th>
             </tr>
          </thead>
 
          <tbody>
-         <#list users as user>
+         <#list items as user>
             <tr>
             <td>${user.id}</td>
             <td>${user.fullName}</td>
             <td>${user.username}</td>
+            
+            <td>
+            
+            <a href="/user/edit/${user.id}" class="btn btn-info btn-small">Edit</a>
+            <a href="/user/delete/${user.id}" class="btn btn-danger btn-small">Delete</a>
+            
+            </td>
+            
             </tr>
          </#list>
          </tbody>
