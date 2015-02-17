@@ -12,6 +12,8 @@ public enum GpioPin {
 	/** */
 	GPIO_3(3),
 	/** */
+	GPIO_4(4),
+	/** */
 	GPIO_7(7),
 	/** */
 	GPIO_8(8),
@@ -30,11 +32,15 @@ public enum GpioPin {
 	/** */
 	GPIO_18(18),
 	/** */
+	GPIO_21(21),
+	/** */
 	GPIO_22(22),
 	/** */
 	GPIO_23(23),
 	/** */
 	GPIO_24(24),
+	/** */
+	GPIO_25(25),
 	/** */
 	GPIO_27(27);
 

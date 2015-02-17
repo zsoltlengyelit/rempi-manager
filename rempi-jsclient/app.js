@@ -3,25 +3,56 @@
  */
 
 var _ = require('underscore');
-var cmd = require('./options');
-var IoController = require('./IoController');
-var rp = require('request-promise');
+var options = require('./options');
+var cmd = options.cmd;
+var getopt = options.opt;
+
+var host = cmd.options['host'];
+var port = cmd.options['port'] || 8080;
+var clientId = cmd.options['clientId'];
+var reqInterval = cmd.options['delay'] || 2;
+
+if (!host || !clientId) {
+    getopt.showHelp();
+    process.exit(1);
+}
+
+var IoController = new (require('./IoController'));
+var http = require('http');
+
+function call(){
+
+    var options = {
+        hostname: host,
+        port: port,
+        path: '/api/client/'+clientId+'/state',
+        method: 'GET',
+        headers: {
+        }
+    };
+
+    var req = http.request(options, function(res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            var state = JSON.parse(chunk);
+
+            if(state.error){
+                console.log('Error:' + state.error)
+            }else{
+                IoController.changeState(state);
+            }
+        });
+    });
+
+    req.on('error', function(e) {
+        console.log('problem with request: ' + e.message);
+
+        IoController.forceCloseOpens();
+
+    });
+    req.end();
+}
+// main
 
 
-var l = console.log;
-
-console.log(cmd);
-
-var host = cmd.options['apiUrl'];
-
-options = {
-    method: 'GET',
-    uri: host,
-    resolveWithFullResponse: true
-};
- 
-rp(host)
-    .then(function (body) {
-        console.log(body.substr(0, 10));
-    })
-    .catch(console.error);
+setInterval(call, reqInterval * 1000);

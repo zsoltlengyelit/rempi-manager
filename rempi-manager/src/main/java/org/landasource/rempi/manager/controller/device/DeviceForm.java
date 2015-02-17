@@ -22,6 +22,9 @@ public class DeviceForm {
 	@NotNull
 	private Long deviceTypeId;
 
+	@NotNull
+	private Long wiringId;
+
 	public String getName() {
 		return name;
 	}
@@ -44,6 +47,14 @@ public class DeviceForm {
 
 	public void setDeviceTypeId(final Long deviceTypeId) {
 		this.deviceTypeId = deviceTypeId;
+	}
+
+	public Long getWiringId() {
+		return wiringId;
+	}
+
+	public void setWiringId(final Long wiringId) {
+		this.wiringId = wiringId;
 	}
 
 }

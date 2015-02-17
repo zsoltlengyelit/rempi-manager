@@ -14,8 +14,12 @@ public class GpioState extends HashMap<GpioPin, PinState> {
 		GpioPin pinKey = null;
 
 		if (key instanceof String) {
-			final Integer index = Integer.valueOf((String) key);
-			pinKey = GpioPin.byIndex(index);
+			try {
+				final Integer index = Integer.valueOf((String) key);
+				pinKey = GpioPin.byIndex(index);
+			} catch (final NumberFormatException e) {
+				pinKey = GpioPin.valueOf((String) key);
+			}
 
 		} else if (key instanceof Number) {
 			pinKey = GpioPin.byIndex(((Number) key).intValue());

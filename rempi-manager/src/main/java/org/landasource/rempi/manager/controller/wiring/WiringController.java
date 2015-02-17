@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -64,7 +65,14 @@ public class WiringController extends CrudController<Wiring, WiringForm> {
 
 		final Set<Entry<String, String>> entrySet = form.getPinTable().entrySet();
 		for (final Entry<String, String> entry : entrySet) {
-			model.getPinTable().put(GpioPin.valueOf(entry.getKey()), entry.getValue());
+			final GpioPin gpioPin = GpioPin.valueOf(entry.getKey());
+			final String name = entry.getValue();
+
+			if (StringUtils.isEmpty(name)) {
+				model.getPinTable().remove(gpioPin);
+			} else {
+				model.getPinTable().put(gpioPin, name);
+			}
 		}
 	}
 

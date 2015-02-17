@@ -30,6 +30,18 @@
             </#list>
             </select>
          </@html.formGroup>
+         
+         <@html.formGroup label="Wiring" field="wiringId">
+            <select name="wiringId" class="form-control">
+            <#list wirings as wiring>
+               <#if form.wiringId?? && wiring.id == form.wiringId>
+                  <option value="${wiring.id}" selected>${wiring.name}</option>
+               <#else>
+                  <option value="${wiring.id}">${wiring.name}</option>
+               </#if>
+            </#list>
+            </select>
+         </@html.formGroup>
                       
          <button type="submit" class="btn btn-default">Submit</button>
          <button type="reset" class="btn btn-default">Reset</button>

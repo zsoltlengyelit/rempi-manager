@@ -9,14 +9,13 @@
    </div>
    <div class="panel-body">
          
-         <ul class="list-group">
-            <#assign gpios = ["24","17", "18", "22", "23"]>
-            <#list gpios as gpio>
-               <li class="list-group-item">${gpio}: 
+         <ul class="list-group">           
+            <#list namedPins as gpio>
+               <li class="list-group-item">${device.wiring.getPinName(gpio)}: 
                   <#if state[gpio].isEnabled()>
-                     <a class="btn btn-small btn-success" href="/device/control/${device.id}/gpio/${gpio}/disable">Disable</a>
+                     <a class="btn btn-small btn-success" href="/device/control/${device.id}/gpio/${gpio.pinNumber}/disable">Disable</a>
                   <#else>
-                     <a class="btn btn-small btn-danger" href="/device/control/${device.id}/gpio/${gpio}/enable">Enable</a>
+                     <a class="btn btn-small btn-danger" href="/device/control/${device.id}/gpio/${gpio.pinNumber}/enable">Enable</a>
                   </#if>
                </li>
             </#list>

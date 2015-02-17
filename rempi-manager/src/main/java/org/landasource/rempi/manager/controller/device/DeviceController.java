@@ -1,12 +1,20 @@
 package org.landasource.rempi.manager.controller.device;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.landasource.rempi.manager.core.clientstate.GpioState;
 import org.landasource.rempi.manager.core.clientstate.StateStore;
 import org.landasource.rempi.manager.core.controller.CrudController;
+import org.landasource.rempi.manager.core.gpio.GpioPin;
 import org.landasource.rempi.manager.model.Device;
 import org.landasource.rempi.manager.model.DeviceType;
+import org.landasource.rempi.manager.model.Wiring;
 import org.landasource.rempi.manager.repo.DeviceRepo;
 import org.landasource.rempi.manager.repo.DeviceTypeRepo;
+import org.landasource.rempi.manager.repo.WiringRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
@@ -31,6 +39,8 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 	private DeviceTypeRepo deviceTypeRepo;
 	@Autowired
 	private StateStore stateStore;
+	@Autowired
+	private WiringRepo wiringRepo;
 
 	@Override
 	protected CrudRepository<Device, Long> getRepo() {
@@ -50,6 +60,19 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 
 		final GpioState state = stateStore.getState(device.getSerial());
 		modelMap.addAttribute("state", state);
+
+		final List<GpioPin> namedPins = new ArrayList<GpioPin>(device.getWiring().getPinTable().keySet());
+		Collections.sort(namedPins, new Comparator<GpioPin>() {
+
+			@Override
+			public int compare(final GpioPin o1, final GpioPin o2) {
+				final String n1 = device.getWiring().getPinTable().get(o1);
+				final String n2 = device.getWiring().getPinTable().get(o2);
+				return n1.compareToIgnoreCase(n2);
+			}
+		});
+
+		modelMap.addAttribute("namedPins", namedPins);
 
 		return "device/control";
 	}
@@ -91,6 +114,7 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		form.setName(model.getName());
 		form.setSerial(model.getSerial());
 		form.setDeviceTypeId(model.getDeviceType().getId());
+		form.setWiringId(model.getWiring().getId());
 	}
 
 	@Override
@@ -98,12 +122,16 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		model.setName(form.getName());
 		model.setSerial(form.getSerial());
 		model.setDeviceType(deviceTypeRepo.findOne(form.getDeviceTypeId()));
+		model.setWiring(wiringRepo.findOne(form.getWiringId()));
 	}
 
 	@Override
 	protected void addFormParams(final ModelMap modelMap) {
 		final Iterable<DeviceType> types = deviceTypeRepo.findAll();
 		modelMap.addAttribute("deviceTypes", types);
+
+		final Iterable<Wiring> wirings = wiringRepo.findAll();
+		modelMap.addAttribute("wirings", wirings);
 
 	}
 

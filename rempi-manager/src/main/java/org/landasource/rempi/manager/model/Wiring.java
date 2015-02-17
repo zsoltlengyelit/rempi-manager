@@ -8,11 +8,13 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyEnumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -42,6 +44,7 @@ public class Wiring implements Serializable {
 	private String name;
 
 	@ElementCollection
+	@MapKeyEnumerated(EnumType.STRING)
 	@MapKeyColumn(name = "gpioPin", length = 50)
 	@Column(name = "gpioPinName", length = 100, nullable = false)
 	@CollectionTable(name = "pintables", joinColumns = @JoinColumn(name = "wiring_id"))
@@ -72,6 +75,16 @@ public class Wiring implements Serializable {
 
 	public void setPinTable(final Map<GpioPin, String> pinTable) {
 		this.pinTable = pinTable;
+	}
+
+	public String getPinName(final Object key) {
+		GpioPin gpioPin = null;
+		if (key instanceof String) {
+			gpioPin = GpioPin.valueOf((String) key);
+		} else if (key instanceof GpioPin) {
+			gpioPin = (GpioPin) key;
+		}
+		return getPinTable().get(gpioPin);
 	}
 
 	@Override

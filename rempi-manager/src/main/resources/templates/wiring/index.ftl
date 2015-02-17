@@ -22,8 +22,8 @@
                <td>${wiring.name}</td>             
                <td>
                   <div class="btn-group">
-                     <a href="/device/edit/${wiring.id}" class="btn btn-info btn-small">Edit</a>                     
-                     <a href="/device/delete/${wiring.id}" class="btn btn-danger btn-small">Delete</a>
+                     <a href="/wiring/edit/${wiring.id}" class="btn btn-info btn-small">Edit</a>                     
+                     <a href="/wiring/delete/${wiring.id}" class="btn btn-danger btn-small">Delete</a>
                   </div>
                </td>
             </tr>
