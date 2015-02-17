@@ -1,0 +1,17 @@
+{
+  "name": "rempi-jsclient",
+  "version": "0.1.0",
+  "description": "Rempi NodeJs client",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Landasource",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "pi-gpio": "0.0.6",
+    "request-promise": "~0.4.0",
+    "node-getopt": "~0.2.3",
+    "underscore": "~1.7.0"
+  }
+}
