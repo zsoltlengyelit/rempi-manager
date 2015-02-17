@@ -118,6 +118,7 @@
                <li><a href="/user"><i class="fa fa-fw fa-bar-chart-o"></i> Users</a></li>
                <li><a href="/device"><i class="fa fa-fw fa-table"></i> Devices</a></li>
                <li><a href="/deviceType"><i class="fa fa-fw fa-table"></i> Device types</a></li>
+               <li><a href="/wiring"><i class="fa fa-fw fa-table"></i>Wirings</a></li>
                
                <li><a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                   <ul id="demo" class="collapse">

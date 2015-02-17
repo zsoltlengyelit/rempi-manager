@@ -18,7 +18,11 @@
          <@html.formGroup label="Commands" field="commands">
             <select name="commands" class="form-control" multiple="multiple">
             <#list commands as command>
+               <#if form.commands?seq_contains(command.getCanonicalName())>
+               <option value="${command.getCanonicalName()}" selected>${command.getSimpleName()}</option>
+               <#else>
                <option value="${command.getCanonicalName()}">${command.getSimpleName()}</option>
+               </#if>
             </#list>
             </select>
          </@html.formGroup>

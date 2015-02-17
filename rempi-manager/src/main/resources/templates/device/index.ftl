@@ -29,6 +29,7 @@
 
                   <div class="btn-group">
                      <a href="/device/edit/${device.id}" class="btn btn-info btn-small">Edit</a>
+                     <a href="/device/control/${device.id}" class="btn btn-info btn-small">Control</a>
                      <a href="/device/delete/${device.id}" class="btn btn-danger btn-small">Delete</a>
                   </div>
 
