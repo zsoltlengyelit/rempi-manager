@@ -3,12 +3,10 @@ package org.landasource.rempi.manager.api;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.landasource.rempi.common.GpioPin;
-import org.landasource.rempi.common.PinState;
-import org.landasource.rempi.common.api.ClientApi;
-import org.landasource.rempi.common.api.ClientState;
 import org.landasource.rempi.manager.core.clientstate.GpioState;
 import org.landasource.rempi.manager.core.clientstate.StateStore;
+import org.landasource.rempi.manager.core.gpio.GpioPin;
+import org.landasource.rempi.manager.core.gpio.PinState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -3,8 +3,8 @@ package org.landasource.rempi.manager.controller.wiring;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.landasource.rempi.common.GpioPin;
 import org.landasource.rempi.manager.core.controller.CrudController;
+import org.landasource.rempi.manager.core.gpio.GpioPin;
 import org.landasource.rempi.manager.model.Wiring;
 import org.landasource.rempi.manager.repo.WiringRepo;
 import org.springframework.beans.factory.annotation.Autowired;

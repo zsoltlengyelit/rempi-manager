@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.landasource.rempi.common.GpioPin;
+import org.landasource.rempi.manager.core.gpio.GpioPin;
 
 /**
  * GPIO wirin of devices.

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.landasource.rempi.common.GpioPin;
-import org.landasource.rempi.common.PinMode;
-import org.landasource.rempi.common.PinState;
+import org.landasource.rempi.manager.core.gpio.GpioPin;
+import org.landasource.rempi.manager.core.gpio.PinMode;
+import org.landasource.rempi.manager.core.gpio.PinState;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

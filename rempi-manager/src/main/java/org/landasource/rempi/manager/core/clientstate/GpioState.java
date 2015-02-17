@@ -2,9 +2,9 @@ package org.landasource.rempi.manager.core.clientstate;
 
 import java.util.HashMap;
 
-import org.landasource.rempi.common.GpioPin;
-import org.landasource.rempi.common.PinMode;
-import org.landasource.rempi.common.PinState;
+import org.landasource.rempi.manager.core.gpio.GpioPin;
+import org.landasource.rempi.manager.core.gpio.PinMode;
+import org.landasource.rempi.manager.core.gpio.PinState;
 
 public class GpioState extends HashMap<GpioPin, PinState> {
 
