@@ -38,7 +38,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SB Admin</a>
+            <a class="navbar-brand" href="/">SB Admin</a>
          </div>
          <!-- Top Menu Items -->
          <ul class="nav navbar-right top-nav">
@@ -114,7 +114,7 @@
          <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
          <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-               <li class="active"><a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+               <li class="active"><a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                <li><a href="/user"><i class="fa fa-fw fa-bar-chart-o"></i> Users</a></li>
                <li><a href="/device"><i class="fa fa-fw fa-table"></i> Devices</a></li>
                <li><a href="/deviceType"><i class="fa fa-fw fa-table"></i> Device types</a></li>
