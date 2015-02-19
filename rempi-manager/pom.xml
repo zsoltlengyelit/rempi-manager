@@ -4,7 +4,7 @@
 	<groupId>org.landasource</groupId>
 	<artifactId>rempi-manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 
 	<name>demo</name>
@@ -21,6 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>org.landasource.rempi.manager.RempiManagerApplication</start-class>
 		<java.version>1.7</java.version>
+		<tomcat.deploy.url>http://localhost:80/manager/text</tomcat.deploy.url>
 	</properties>
 
 	<dependencies>
@@ -40,6 +41,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -102,6 +109,38 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>tomcat-deploy</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<configuration>
+							<!-- Tomcat 7 has a different manager path - text - than other versions -->
+							<url>${tomcat.deploy.url}</url>
+							<!-- Refer to the server settings in your ~/.m2/settings.xml -->
+							<server>dev-tomcat</server>
+							<path>/rempi-manager</path>
+							<update>true</update>
+						</configuration>
+					</plugin>
+				</plugins>
 
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.tomcat.maven</groupId>
+							<artifactId>tomcat7-maven-plugin</artifactId>
+							<version>2.0</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+
+		</profile>
+
+	</profiles>
 
 </project>

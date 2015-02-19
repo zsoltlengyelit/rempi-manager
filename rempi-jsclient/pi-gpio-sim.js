@@ -17,9 +17,8 @@ var gpio = {
 		(callback || noop)();
 	},
 
-	getDirection: function(pinNumber, callback) {		
-		callback = callback || noop;
-		callback(null, "out");
+	getDirection: function(pinNumber, callback) {				
+		(callback || noop)(null, "out");
 		
 	},
 
