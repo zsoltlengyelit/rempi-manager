@@ -2,8 +2,7 @@
 
  */
 
-var gpio = require("pi-gpio");
-
+ // opened channels. Key: channel id
 var opened = {};
 var pinMapping = {
     "3" : 0,
@@ -46,8 +45,13 @@ for (var k in pinMapping) {
 }
 
 
-function Controller() {
+/**
+ * @param simulate use GPIO?
+ */
+function Controller(simulate) {
 
+    var gpio = simulate ? require('./pi-gpio-sim') : require("pi-gpio");
+    
     function writeOut(ch, val, cb) {
         cb = cb || function () {
         };

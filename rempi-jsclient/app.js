@@ -11,13 +11,15 @@ var host = cmd.options['host'];
 var port = cmd.options['port'] || 8080;
 var clientId = cmd.options['clientId'];
 var reqInterval = cmd.options['delay'] || 2;
+var simulate = !!cmd.options['simulate'] || false;
 
 if (!host || !clientId) {
     getopt.showHelp();
     process.exit(1);
 }
 
-var IoController = new (require('./IoController'));
+var IC = require('./IoController');
+var IoController = new IC(simulate);
 var http = require('http');
 
 function call(){
