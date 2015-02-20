@@ -10,17 +10,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 @SpringBootApplication
 @EnableTransactionManagement
-public class RempiManagerApplication extends SpringBootServletInitializer {
+public class RempiManagerApplication{
 
 	public static void main(final String[] args) {
 
 		SpringApplication.run(RempiManagerApplication.class, args);
 	}
 
-	@Override
-	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
-		return application.sources(applicationClass);
-	}
-
-	private static Class<RempiManagerApplication> applicationClass = RempiManagerApplication.class;
 }
