@@ -4,7 +4,7 @@
 	<groupId>org.landasource</groupId>
 	<artifactId>rempi-manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>rempi-manager</name>
 	<description>Demo project for Spring Boot</description>
@@ -47,11 +47,11 @@
 			<!-- </exclusion> -->
 			<!-- </exclusions> -->
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-tomcat</artifactId> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
@@ -64,11 +64,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>
@@ -111,6 +107,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.springframework.boot</groupId> -->
+<!-- 				<artifactId>spring-boot-maven-plugin</artifactId> -->
+<!-- 				<version>1.2.1.RELEASE</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<goals> -->
+<!-- 							<goal>repackage</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 			<!-- <plugin> -->
 			<!-- <groupId>org.apache.maven.plugins</groupId> -->
 			<!-- <artifactId>maven-install-plugin</artifactId> -->
@@ -133,39 +141,39 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>tomcat-deploy</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.tomcat.maven</groupId>
-						<artifactId>tomcat7-maven-plugin</artifactId>
-						<configuration>
-							<!-- Tomcat 7 has a different manager path - text - than other versions -->
-							<url>${tomcat.deploy.url}</url>
-							<!-- Refer to the server settings in your ~/.m2/settings.xml -->
-							<server>dev-tomcat</server>
-							<path>/rempi-manager</path>
-							<update>true</update>
-						</configuration>
-					</plugin>
-				</plugins>
+<!-- 	<profiles> -->
+<!-- 		<profile> -->
+<!-- 			<id>tomcat-deploy</id> -->
+<!-- 			<build> -->
+<!-- 				<plugins> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 						<artifactId>tomcat7-maven-plugin</artifactId> -->
+<!-- 						<configuration> -->
+<!-- 							Tomcat 7 has a different manager path - text - than other versions -->
+<!-- 							<url>${tomcat.deploy.url}</url> -->
+<!-- 							Refer to the server settings in your ~/.m2/settings.xml -->
+<!-- 							<server>dev-tomcat</server> -->
+<!-- 							<path>/rempi-manager</path> -->
+<!-- 							<update>true</update> -->
+<!-- 						</configuration> -->
+<!-- 					</plugin> -->
+<!-- 				</plugins> -->
 
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.tomcat.maven</groupId>
-							<artifactId>tomcat7-maven-plugin</artifactId>
-							<version>2.0</version>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
+<!-- 				<pluginManagement> -->
+<!-- 					<plugins> -->
+<!-- 						<plugin> -->
+<!-- 							<groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 							<artifactId>tomcat7-maven-plugin</artifactId> -->
+<!-- 							<version>2.0</version> -->
+<!-- 						</plugin> -->
+<!-- 					</plugins> -->
+<!-- 				</pluginManagement> -->
+<!-- 			</build> -->
 
-		</profile>
+<!-- 		</profile> -->
 
-	</profiles>
+<!-- 	</profiles> -->
 
 
 </project>
