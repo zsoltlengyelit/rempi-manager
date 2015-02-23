@@ -4,12 +4,17 @@
 package org.landasource.rempi.manager.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -22,7 +27,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  */
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = User.USERNAME_FIELD, name = "unique_username"))
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = User.USERNAME_FIELD, name = "unique_username"))
 public class User implements Serializable {
 
 	/** Generated. */
@@ -40,11 +45,20 @@ public class User implements Serializable {
 	private String username;
 
 	@NotNull
-	private String passwordHash;
+	private String password;
 
 	@NotNull
 	@NotEmpty
 	private String fullName;
+
+	private boolean enabled;
+
+	/**
+	 *
+	 */
+	@JoinTable(name = "user_roles")
+	@ManyToMany(fetch = FetchType.LAZY)
+	private Set<Role> roles;
 
 	public Long getId() {
 		return id;
@@ -62,12 +76,31 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordHash(final String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(final boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Set<Role> getRoles() {
+		if (null == roles) {
+			roles = new HashSet<Role>();
+		}
+		return roles;
+	}
+
+	public void setRoles(final Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public String getFullName() {

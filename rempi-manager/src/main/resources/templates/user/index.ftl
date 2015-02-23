@@ -12,6 +12,7 @@
                <th>ID</th>
                <th>Full name</th>
                <th>Username</th>
+               <th>Active</th>
                <th></th>
             </tr>
          </thead>
@@ -22,6 +23,7 @@
             <td>${user.id}</td>
             <td>${user.fullName}</td>
             <td>${user.username}</td>
+            <td>${user.enabled?string('Yes', 'No')}</td>
             
             <td>
             
