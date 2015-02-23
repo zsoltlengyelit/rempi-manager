@@ -23,7 +23,11 @@ public class LoginController {
 		model.setViewName("login");
 
 		return model;
+	}
 
+	@RequestMapping("/forbidden")
+	public String forbidden() {
+		return "redirect:/";
 	}
 
 }

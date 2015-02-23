@@ -39,7 +39,7 @@
    </div>
 </div>
 
-<a href="/device" class="btn btn-default btn-small">Back</a>
+<a href="/admin/wiring" class="btn btn-default btn-small">Back</a>
 
 
 </@layout.main>

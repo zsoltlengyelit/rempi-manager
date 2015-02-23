@@ -104,8 +104,12 @@ public abstract class CrudController<Model, Form> {
 		return getControllerName() + "/form";
 	}
 
-	private String redirectIndex() {
-		return "redirect:/" + getControllerName();
+	protected String redirectIndex() {
+		return isAdminController() ? "redirect:/admin/" + getControllerName() : "redirect:/" + getControllerName();
+	}
+
+	protected boolean isAdminController() {
+		return false;
 	}
 
 	private Form createForm() {

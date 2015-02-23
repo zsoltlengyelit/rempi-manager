@@ -12,11 +12,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("admin/user")
 public class UserController extends CrudController<User, UserForm> {
 
 	@Autowired
 	private UserRepo userRepo;
+
+	@Override
+	protected boolean isAdminController() {
+		return true;
+	}
 
 	@Override
 	protected CrudRepository<User, Long> getRepo() {

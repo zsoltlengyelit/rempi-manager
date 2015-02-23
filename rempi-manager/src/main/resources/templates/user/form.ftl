@@ -22,7 +22,7 @@
    </div>
 </div>
 
-<a href="/user" class="btn btn-default btn-small">Back</a>
+<a href="/admin/user" class="btn btn-default btn-small">Back</a>
 
 
 </@layout.main>

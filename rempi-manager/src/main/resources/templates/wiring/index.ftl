@@ -22,8 +22,8 @@
                <td>${wiring.name}</td>             
                <td>
                   <div class="btn-group">
-                     <a href="/wiring/edit/${wiring.id}" class="btn btn-info btn-small">Edit</a>                     
-                     <a href="/wiring/delete/${wiring.id}" class="btn btn-danger btn-small">Delete</a>
+                     <a href="/admin/wiring/edit/${wiring.id}" class="btn btn-info btn-small">Edit</a>                     
+                     <a href="/admin/wiring/delete/${wiring.id}" class="btn btn-danger btn-small">Delete</a>
                   </div>
                </td>
             </tr>
@@ -37,7 +37,7 @@
 </div>
 
 <div>
-   <a href="/wiring/add" class="btn btn-primary">Add wiring</a>
+   <a href="/admin/wiring/add" class="btn btn-primary">Add wiring</a>
 </div>
 
 </@layout.main>

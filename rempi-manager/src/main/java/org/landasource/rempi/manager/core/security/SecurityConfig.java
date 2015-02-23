@@ -46,14 +46,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").access("hasRole('ADMIN') or hasRole('CUSTOMER')")
 		.antMatchers("/admin/**").access("hasRole('ADMIN')")
 		.antMatchers("/device/**").access("hasRole('ADMIN') or hasRole('CUSTOMER')")
-		.antMatchers("/user/**").access("hasRole('ADMIN')")
-		.antMatchers("/wiring/**").access("hasRole('ADMIN')")
 		.and()
 		.formLogin()
 		.loginPage("/login")
 		.permitAll()
 		.and()
-		.logout().permitAll();
+		.logout().permitAll()
+		.and().exceptionHandling().accessDeniedPage("/forbidden");
+
 		// @formatter:on
 	}
 

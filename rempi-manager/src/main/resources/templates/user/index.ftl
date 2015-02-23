@@ -27,8 +27,8 @@
             
             <td>
             
-            <a href="/user/edit/${user.id}" class="btn btn-info btn-small">Edit</a>
-            <a href="/user/delete/${user.id}" class="btn btn-danger btn-small">Delete</a>
+            <a href="/admin/user/edit/${user.id}" class="btn btn-info btn-small">Edit</a>
+            <a href="/admin/user/delete/${user.id}" class="btn btn-danger btn-small">Delete</a>
             
             </td>
             
@@ -43,7 +43,7 @@
 </div>
 
 <div>
-   <a href="/user/add" class="btn btn-primary">Add user</a>
+   <a href="/admin/user/add" class="btn btn-primary">Add user</a>
 </div>
 
 </@layout.main>
