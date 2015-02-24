@@ -56,7 +56,7 @@
 									</span>
 									<div class="media-body">
 										<h5 class="media-heading">
-											<strong sec:authentication="name"></strong>
+											<strong th:text="${#httpServletRequest.remoteUser}"></strong>
 										</h5>
 										<p class="small text-muted">
 											<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
@@ -72,7 +72,7 @@
 									</span>
 									<div class="media-body">
 										<h5 class="media-heading">
-											<strong sec:authentication="name"></strong>
+											<strong th:text="${#httpServletRequest.remoteUser}"></strong>
 										</h5>
 										<p class="small text-muted">
 											<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
