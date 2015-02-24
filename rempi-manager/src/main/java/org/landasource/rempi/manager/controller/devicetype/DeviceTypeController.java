@@ -10,7 +10,6 @@ import org.landasource.rempi.manager.model.DeviceType;
 import org.landasource.rempi.manager.repo.DeviceTypeRepo;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,14 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("deviceType")
+@RequestMapping("admin/deviceType")
 public class DeviceTypeController extends CrudController<DeviceType, DeviceTypeForm> {
 
 	@Autowired
 	private DeviceTypeRepo deviceTypeRepo;
 
-	@Autowired
-	private ApplicationContext context;
+	@Override
+	protected boolean isAdminController() {
+		return true;
+	}
 
 	@Override
 	protected CrudRepository<DeviceType, Long> getRepo() {

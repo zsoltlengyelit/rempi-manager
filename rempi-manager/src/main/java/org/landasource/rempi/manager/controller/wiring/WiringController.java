@@ -21,11 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("/wiring")
+@RequestMapping("admin/wiring")
 public class WiringController extends CrudController<Wiring, WiringForm> {
 
 	@Autowired
 	private WiringRepo wiringRepo;
+
+	@Override
+	protected boolean isAdminController() {
+		return true;
+	}
 
 	@Override
 	protected CrudRepository<Wiring, Long> getRepo() {

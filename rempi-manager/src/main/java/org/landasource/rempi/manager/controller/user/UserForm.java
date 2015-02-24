@@ -24,6 +24,8 @@ public class UserForm {
 	@NotEmpty
 	private String fullName;
 
+	private boolean enabled;
+
 	public String getUsername() {
 		return username;
 	}
@@ -42,6 +44,14 @@ public class UserForm {
 
 	public void setFullName(final String fullName) {
 		this.fullName = fullName;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(final boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }
