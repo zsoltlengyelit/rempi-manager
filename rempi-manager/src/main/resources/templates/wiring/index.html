@@ -10,7 +10,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Users</h3>
+				<h3 class="panel-title">wirings</h3>
 			</div>
 			<div class="panel-body">
 
@@ -18,23 +18,19 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Full name</th>
-							<th>Username</th>
-							<th>Active</th>
+							<th>Name</th>							
 							<th></th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<tr th:each="user : ${items}">
-							<td th:text="${user.id}"></td>
-							<td th:text="${user.fullName}"></td>
-							<td th:text="${user.username}"></td>
-							<td th:text="${user.enabled ? 'Yes' :'No'}"></td>
+						<tr th:each="wiring : ${items}">
+							<td th:text="${wiring.id}"></td>
+							<td th:text="${wiring.name}"></td>
 
-							<td><a th:href="@{/admin/user/edit/{id}(id=${user.id})}"
+							<td><a th:href="@{/admin/wiring/edit/{id}(id=${wiring.id})}"
 								class="btn btn-info btn-small">Edit</a> <a
-								th:href="@{/admin/user/delete/{id}(id=${user.id})}"
+								th:href="@{/admin/wiring/delete/{id}(id=${wiring.id})}"
 								class="btn btn-danger btn-small">Delete</a></td>
 
 						</tr>
@@ -47,7 +43,7 @@
 		</div>
 
 		<div>
-			<a href="/admin/user/add" class="btn btn-primary">Add user</a>
+			<a href="/admin/wiring/add" class="btn btn-primary">Add wiring</a>
 		</div>
 
 	</section>
