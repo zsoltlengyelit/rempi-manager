@@ -20,7 +20,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>org.landasource.rempi.manager.RempiManagerApplication</start-class>
 		<java.version>1.7</java.version>
-		<tomcat.deploy.url>http://localhost:80/manager/text</tomcat.deploy.url>
 	</properties>
 
 	<dependencies>
@@ -33,10 +32,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-freemarker</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-freemarker</artifactId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.21</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -47,15 +56,15 @@
 			<!-- </exclusion> -->
 			<!-- </exclusions> -->
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-tomcat</artifactId> -->
-<!-- 			<scope>provided</scope> -->
-<!-- 		</dependency> -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-tomcat</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-websocket</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -64,7 +73,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>
@@ -88,20 +97,22 @@
 			<version>1.2.16</version>
 		</dependency>
 
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.social</groupId> -->
+		<!-- <artifactId>spring-social-core</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.neo4j</groupId> -->
+		<!-- <artifactId>neo4j-cypher-compiler-2.1</artifactId> -->
+		<!-- <version>2.1.5</version> -->
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-cypher-compiler-2.1</artifactId>
-			<version>2.1.5</version>
 		</dependency>
 	</dependencies>
 
@@ -112,18 +123,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.springframework.boot</groupId> -->
-<!-- 				<artifactId>spring-boot-maven-plugin</artifactId> -->
-<!-- 				<version>1.2.1.RELEASE</version> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<goals> -->
-<!-- 							<goal>repackage</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.springframework.boot</groupId> -->
+			<!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
+			<!-- <version>1.2.1.RELEASE</version> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <goals> -->
+			<!-- <goal>repackage</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 			<!-- <plugin> -->
 			<!-- <groupId>org.apache.maven.plugins</groupId> -->
 			<!-- <artifactId>maven-install-plugin</artifactId> -->
@@ -146,39 +157,39 @@
 		</plugins>
 	</build>
 
-<!-- 	<profiles> -->
-<!-- 		<profile> -->
-<!-- 			<id>tomcat-deploy</id> -->
-<!-- 			<build> -->
-<!-- 				<plugins> -->
-<!-- 					<plugin> -->
-<!-- 						<groupId>org.apache.tomcat.maven</groupId> -->
-<!-- 						<artifactId>tomcat7-maven-plugin</artifactId> -->
-<!-- 						<configuration> -->
-<!-- 							Tomcat 7 has a different manager path - text - than other versions -->
-<!-- 							<url>${tomcat.deploy.url}</url> -->
-<!-- 							Refer to the server settings in your ~/.m2/settings.xml -->
-<!-- 							<server>dev-tomcat</server> -->
-<!-- 							<path>/rempi-manager</path> -->
-<!-- 							<update>true</update> -->
-<!-- 						</configuration> -->
-<!-- 					</plugin> -->
-<!-- 				</plugins> -->
+	<!-- <profiles> -->
+	<!-- <profile> -->
+	<!-- <id>tomcat-deploy</id> -->
+	<!-- <build> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.tomcat.maven</groupId> -->
+	<!-- <artifactId>tomcat7-maven-plugin</artifactId> -->
+	<!-- <configuration> -->
+	<!-- Tomcat 7 has a different manager path - text - than other versions -->
+	<!-- <url>${tomcat.deploy.url}</url> -->
+	<!-- Refer to the server settings in your ~/.m2/settings.xml -->
+	<!-- <server>dev-tomcat</server> -->
+	<!-- <path>/rempi-manager</path> -->
+	<!-- <update>true</update> -->
+	<!-- </configuration> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
 
-<!-- 				<pluginManagement> -->
-<!-- 					<plugins> -->
-<!-- 						<plugin> -->
-<!-- 							<groupId>org.apache.tomcat.maven</groupId> -->
-<!-- 							<artifactId>tomcat7-maven-plugin</artifactId> -->
-<!-- 							<version>2.0</version> -->
-<!-- 						</plugin> -->
-<!-- 					</plugins> -->
-<!-- 				</pluginManagement> -->
-<!-- 			</build> -->
+	<!-- <pluginManagement> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.tomcat.maven</groupId> -->
+	<!-- <artifactId>tomcat7-maven-plugin</artifactId> -->
+	<!-- <version>2.0</version> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </pluginManagement> -->
+	<!-- </build> -->
 
-<!-- 		</profile> -->
+	<!-- </profile> -->
 
-<!-- 	</profiles> -->
+	<!-- </profiles> -->
 
 
 </project>

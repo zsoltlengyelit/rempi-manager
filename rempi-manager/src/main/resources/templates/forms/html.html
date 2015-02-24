@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+	<div layout:fragment="formGroup">
+		<div class="form-group">
+			<label th:for="${field}" th:text="${label}">label</label> 
+			<input layout:fragment="input" th:name="${field}" th:id="${field}" th:class="form-control" />
+		</div>
+	</div>
+</body>
+</html>
