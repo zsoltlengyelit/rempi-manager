@@ -1,50 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/main">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main">
 <head>
 <title>Dashboard</title>
 </head>
 <body>
-	<section layout:fragment="content">
+   <section layout:fragment="content">
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Panel title</h3>
-			</div>
-			<div class="panel-body">
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+         </div>
+         <div class="panel-body">
 
-				<form role="form" method="post" th:object="${form}">
+            <form role="form" method="post" th:object="${form}">
 
-					<div layout:include="forms/html"
-						th:with="field='name', label='Name'">
-						<input type="text" th:field="*{name}" layout:fragment="input" />
-					</div>
+               <div layout:include="forms/html" th:with="field='name', label='Name'">
+                  <input type="text" th:field="*{name}" layout:fragment="input" />
+               </div>
 
-					<div layout:include="forms/html"
-						th:with="field='serial', label='Serial'">
+               <div class="form-group">
 
-						<div class="container-fluid" layout:fragment="input">
+                  <div class="container-fluid">
+                     <label>Serials</label>
 
-							<div class="row" th:each="pin : ${gpioPins}">
-								<div class="col-lg-2" th.text="|${pin}:|"></div>
-								<div class="col-lg-10">
-									<input type="text" th:name="|pinTable[${pin}]|"
-										class="form-control" th:value="${form.pinTable[pin]}" />
-								</div>
-							</div>
+                     <div class="row" th:each="pin : ${gpioPins}">
+                        <div class="col-lg-2" th:text="|${pin}:|"></div>
+                        <div class="col-lg-10">
+                           <input type="text" th:name="|pinTable[${pin}]|" class="form-control" th:value="${form.pinTable[pin.name()]}" />
+                        </div>
+                     </div>
 
-						</div>
-					</div>
+                  </div>
+               </div>
 
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
 
-			</div>
-		</div>
+               <button type="submit" class="btn btn-default">Submit</button>
+               <button type="reset" class="btn btn-default">Reset</button>
 
-		<a href="/admin/wiring" class="btn btn-default btn-small">Back</a>
+            </form>
 
+         </div>
+      </div>
+
+      <a href="/admin/wiring" class="btn btn-default btn-small">Back</a>
+      
+      
 	</section>
 </body>
 </html>

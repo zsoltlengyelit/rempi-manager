@@ -10,6 +10,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
+<<<<<<< HEAD
 				<h3 class="panel-title">Wirings</h3>
 			</div>
 			<div class="panel-body">
@@ -49,3 +50,44 @@
 </body>
 </html>
 
+=======
+				<h3 class="panel-title">wirings</h3>
+			</div>
+			<div class="panel-body">
+
+				<table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>							
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="wiring : ${items}">
+							<td th:text="${wiring.id}"></td>
+							<td th:text="${wiring.name}"></td>
+
+							<td><a th:href="@{/admin/wiring/edit/{id}(id=${wiring.id})}"
+								class="btn btn-info btn-small">Edit</a> <a
+								th:href="@{/admin/wiring/delete/{id}(id=${wiring.id})}"
+								class="btn btn-danger btn-small">Delete</a></td>
+
+						</tr>
+					</tbody>
+
+				</table>
+
+
+			</div>
+		</div>
+
+		<div>
+			<a href="/admin/wiring/add" class="btn btn-primary">Add wiring</a>
+		</div>
+
+	</section>
+</body>
+</html>
+>>>>>>> branch 'master' of https://github.com/zsoltlengyelit/rempi-manager
