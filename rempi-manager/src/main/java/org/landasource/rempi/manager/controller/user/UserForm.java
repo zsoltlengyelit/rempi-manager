@@ -20,6 +20,8 @@ public class UserForm {
 	@NotEmpty(groups = CreateValidation.class)
 	private String password;
 
+	private String oldPassword;
+
 	@NotNull
 	@NotEmpty
 	private String fullName;
@@ -52,6 +54,18 @@ public class UserForm {
 
 	public void setEnabled(final boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(final String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
 	}
 
 }

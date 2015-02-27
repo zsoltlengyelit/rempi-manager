@@ -18,6 +18,9 @@ public class UserController extends CrudController<User, UserForm> {
 	@Autowired
 	private UserRepo userRepo;
 
+	// @Autowired
+	// private UserDetailsService userDetailsService;
+
 	@Override
 	protected boolean isAdminController() {
 		return true;
@@ -67,9 +70,17 @@ public class UserController extends CrudController<User, UserForm> {
 		model.setFullName(form.getFullName());
 		model.setUsername(form.getUsername());
 		model.setEnabled(form.isEnabled());
-		if (!StringUtils.isEmpty(form.getPassword())) {
-			model.setPassword(PasswordUtil.makeHash(form.getPassword()));
-		}
+
+		// if (model.getId() == null) {
+		// if (!StringUtils.isEmpty(form.getPassword())) {
+		model.setPassword(PasswordUtil.makeHash(form.getPassword()));
+		// }
+		// } else {
+		// if (!StringUtils.isEmpty(form.getPassword()) &&
+		// !StringUtils.isEmpty(form.getOldPassword())) {
+		// model.setPassword(PasswordUtil.makeHash(form.getPassword()));
+		// }
+		// }
 
 	}
 }

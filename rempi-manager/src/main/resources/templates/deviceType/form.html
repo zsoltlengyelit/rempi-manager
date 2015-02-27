@@ -1,41 +1,44 @@
-<#import "/layout/main.ftl" as layout>
-<#import "/forms/html.ftl" as html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main">
+<head>
+<title>Dashboard</title>
+</head>
+<body>
+   <section layout:fragment="content">
 
- <#-- <#import "spring.ftl" as spring /> --> <@layout.main>
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+         </div>
+         <div class="panel-body">
 
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Panel title</h3>
-   </div>
-   <div class="panel-body">
+            <form role="form" method="post" th:object="${form}">
 
-      <form role="form" method="post">
-         
-         <@html.formGroup label="Name" field="name">
-            <input type="text" name="name" class="form-control" value="${form.name!''}" />
-         </@html.formGroup>
-         
-         <@html.formGroup label="Commands" field="commands">
-            <select name="commands" class="form-control" multiple="multiple">
-            <#list commands as command>
-               <#if form.commands?seq_contains(command.getCanonicalName())>
-               <option value="${command.getCanonicalName()}" selected>${command.getSimpleName()}</option>
-               <#else>
-               <option value="${command.getCanonicalName()}">${command.getSimpleName()}</option>
-               </#if>
-            </#list>
-            </select>
-         </@html.formGroup>
-             
-         <button type="submit" class="btn btn-default">Submit</button>
-         <button type="reset" class="btn btn-default">Reset</button>
+               <div layout:include="forms/html" th:with="field='name', label='Name'">
+                  <input type="text" th:field="*{name}" layout:fragment="input" />
+               </div>
 
-      </form>
+               <div class="form-group">
+                  <label>Commands</label> <select name="commands" class="form-control" multiple="multiple">
 
-   </div>
-</div>
+                     <option th:each="command : ${commands}" th:selected="${form.commands.contains(command.getCanonicalName())}" th:value="${command.getCanonicalName()}"
+                        th:text="${command.getSimpleName()}"></option>
 
-<a href="/device" class="btn btn-default btn-small">Back</a>
+                  </select>
+
+               </div>
+
+               <button type="submit" class="btn btn-default">Submit</button>
 
 
-</@layout.main>
+            </form>
+
+         </div>
+      </div>
+
+      <a href="/admin/deviceType" class="btn btn-default btn-small">Back</a>
+
+
+   </section>
+</body>
+</html>
