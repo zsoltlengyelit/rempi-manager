@@ -1,0 +1,11 @@
+
+/**
+ * @author lzsolt
+ */ 
+
+"div"(class="form-group"){
+	"label"(for = field){`label`;}	
+	`this.content`;
+}
+
+//`this.toString()`; <- link ResourceWiidget

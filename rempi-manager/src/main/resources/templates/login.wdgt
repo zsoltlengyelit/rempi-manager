@@ -1,9 +1,20 @@
+import templates.forms.formGroup;
+
 "<!DOCTYPE html>";
 "html"(lang = "en"){
 	
 	"body"{
 	
 		`"Error: "  + error`;
+		
+		foreach(field -> label : {username : "Username", password : "Password"}){
+		
+			formGroup(label = label, field=field){			
+			
+				"input"(type = field == "password" ? "password" : "text", name=field);			
+			}
+		}
+		
 	}
 }
 
