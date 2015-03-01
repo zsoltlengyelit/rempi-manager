@@ -81,7 +81,6 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 	public String controlGpio(@PathVariable("id") final Long id, @PathVariable("gpio") final Integer gpio, @PathVariable("mode") final String mode, final ModelMap modelMap) {
 
 		final Device device = deviceRepo.findOne(id);
-		modelMap.addAttribute("device", device);
 
 		final boolean enabled = "enable".equals(mode);
 		stateStore.getState(device.getSerial()).getByGpio(gpio).setEnabled(enabled);

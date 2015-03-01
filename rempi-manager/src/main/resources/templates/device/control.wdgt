@@ -11,22 +11,13 @@ Template("templates/layout/main.html"){
       
       panel(title = "Device"){
          
-      	
-//      	<ul class="list-group">           
-//         
-//         <li class="list-group-item" th:each="gpio : ${namedPins}">
-//               <strong th:text="|${device.wiring.getPinName(gpio.name())}:|"></strong>                  
-//               <a th:if="${state[gpio.name()].isEnabled()}" class="btn btn-small btn-success" th:href="|/device/control/${device.id}/gpio/${gpio.pinNumber}/disable|">Disable</a>                  
-//               <a th:if="${!state[gpio.name()].isEnabled()}" class="btn btn-small btn-danger" th:href="|/device/control/${device.id}/gpio/${gpio.pinNumber}/enable|">Enable</a>                  
-//         </li>            
-//   		</ul>
-      	
       	ul(class="list-group"){
       		
       		foreach(gpio : namedPins){
       			li(class = "list-group-item"){
-      				string(device.wiring.getPinName(gpio.name()));
-      				a(rendered=state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/disable"){"Disable";}
+      				strong(device.wiring.getPinName(gpio.name()) + ": ");
+      				a(state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/disable"){"Disable";}
+      				a(rendered=state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/auto"){"Auto";}
       				a(rendered=!state[gpio.name()].isEnabled(), class="btn btn-sm btn-danger", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/enable"){"Enable";}
       			}
       		}
