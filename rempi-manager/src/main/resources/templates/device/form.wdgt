@@ -1,0 +1,45 @@
+
+import com.landasource.wiidget.library.template.Template;
+import com.landasource.wiidget.library.template.Part;
+import templates.forms.panel;
+import templates.forms.inputRow;
+import templates.forms.formGroup;
+
+Template("templates/layout/main.html"){
+   
+   Part("content"){
+      
+      panel(title = "Device"){
+         
+      	form(method = "post"){
+      		
+      		inputRow(label="Name", field="name", model = form);
+      		inputRow(label="Serial", field="serial", model = form);
+      		
+      		formGroup(label="Device type:", field="deviceTypeId"){
+      			select(name="deviceTypeId", class="form-control"){
+      				foreach(type : deviceTypes){
+	      				option(value=type.id, selected="selected", rendered=(type.id == form.deviceTypeId)){`type.name`;}
+	      				option(value=type.id, rendered=(type.id != form.deviceTypeId)){`type.name`;}
+      				}
+      			}
+      		}
+      		
+      		formGroup(label="Wiringe:", field="wiringId"){
+      			select(name="wiringId", class="form-control"){
+      				foreach(wiring : wirings){
+	      				option(value=wiring.id, selected="selected", rendered=(wiring.id == form.wiringId)){`wiring.name`;}
+	      				option(value=wiring.id, rendered=(wiring.id != form.wiringId)){`wiring.name`;}
+      				}
+      			}
+      		}
+      		
+      		
+      		div(class="form-group"){      		
+      			button(type="submit", class="btn btn-primary"){"Save";}
+      			a(href="/device", class="btn btn-default"){"Back";}
+      		}
+      	}
+      }
+   }
+}

@@ -1,0 +1,5 @@
+import templates.forms.formGroup;
+
+formGroup(field = field, label = label + ":"){
+	input(name=field, value=value~model[field], type = type~"text", class="form-control" );
+}

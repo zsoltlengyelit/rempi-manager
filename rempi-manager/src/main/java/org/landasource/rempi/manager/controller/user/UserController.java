@@ -72,9 +72,9 @@ public class UserController extends CrudController<User, UserForm> {
 		model.setEnabled(form.isEnabled());
 
 		// if (model.getId() == null) {
-		// if (!StringUtils.isEmpty(form.getPassword())) {
-		model.setPassword(PasswordUtil.makeHash(form.getPassword()));
-		// }
+		if (!StringUtils.isEmpty(form.getPassword())) {
+			model.setPassword(PasswordUtil.makeHash(form.getPassword()));
+		}
 		// } else {
 		// if (!StringUtils.isEmpty(form.getPassword()) &&
 		// !StringUtils.isEmpty(form.getOldPassword())) {

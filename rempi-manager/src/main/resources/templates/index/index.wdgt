@@ -1,0 +1,10 @@
+import com.landasource.wiidget.library.template.Template;
+import com.landasource.wiidget.library.template.Part;
+
+Template("templates/layout/main.html"){
+	
+	Part("content"){
+		
+		p("Dashboard");	
+	}
+}

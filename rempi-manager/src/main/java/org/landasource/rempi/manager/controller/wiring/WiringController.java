@@ -44,7 +44,6 @@ public class WiringController extends CrudController<Wiring, WiringForm> {
 
 	@Override
 	protected void validateFormAtSave(final WiringForm form, final BindingResult result) {
-		// TODO Auto-generated method stub
 
 	}
 

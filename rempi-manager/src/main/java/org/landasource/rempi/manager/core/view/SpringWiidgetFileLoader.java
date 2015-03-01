@@ -21,17 +21,11 @@ public class SpringWiidgetFileLoader extends ClassPathFileLoader {
 
 		final String filePath = path;
 
-		// if (filePath.startsWith("/")) {
-		// filePath = filePath.substring(1);
-		// }
-
-		final Resource resource = applicationContext.getResource("classpath:"
-				+ filePath);
+		final Resource resource = applicationContext.getResource("classpath:" + filePath);
 		if (null != resource) {
 			try {
 				return resource.getInputStream();
 			} catch (final IOException e) {
-				return null;
 			}
 		}
 

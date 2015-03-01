@@ -1,0 +1,40 @@
+import com.landasource.wiidget.library.template.Template;
+import com.landasource.wiidget.library.template.Part;
+import templates.forms.panel;
+import templates.forms.inputRow;
+import templates.forms.formGroup;
+
+Template("templates/layout/main.html"){
+   
+   Part("content"){
+      
+      panel(title = "Wiring"){
+         
+      	form(method = "post"){
+      		
+      		inputRow(label="Name", field="name", model = form);
+      		
+      		formGroup(label="Commands", field="commands"){
+      		
+      			select(name="commands", class="form-control", multiple="multiple"){
+      				foreach(command : commands){
+		               option(selected="selected", rendered=form.commands.contains(command.getCanonicalName()), value= command.getCanonicalName()){
+		                  `command.getSimpleName()`;
+		               }
+		               option(rendered=!form.commands.contains(command.getCanonicalName()), value= command.getCanonicalName()){
+		                  `command.getSimpleName()`;
+		               }
+
+      				}
+      			}
+      		}
+      		
+      		div(class="form-group"){      		
+      			button(type="submit", class="btn btn-primary"){"Save";}
+      			a(href="/admin/wiring", class="btn btn-default"){"Back";}
+      		}
+      		
+      	}      	   
+      }
+   }
+}

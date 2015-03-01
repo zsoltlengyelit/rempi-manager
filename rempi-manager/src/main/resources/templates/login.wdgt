@@ -37,8 +37,7 @@ import templates.forms.formGroup;
 		"div"(class="container"){
 		
 			"form"(class="form-signin", method="post"){
-		
-				
+						
 				`"Error: "  + error`(rendered = error != null);
 			
 				foreach(field -> label : {username : "Username", password : "Password"}){

@@ -1,0 +1,36 @@
+import com.landasource.wiidget.library.template.Template;
+import com.landasource.wiidget.library.template.Part;
+import templates.forms.panel;
+import com.landasource.wiidget.library.html.table.Table;
+import com.landasource.wiidget.library.html.table.Column;
+import com.landasource.wiidget.library.html.table.ContentColumn;
+
+Template("templates/layout/main.html"){
+	
+	Part("content"){
+		
+		panel(title = "Devices"){
+			
+			Table(class="table table-hover table-striped", value=items){
+				
+				Column(field = "id", header ="ID");
+				Column(field = "name", header ="Name");
+				Column(field = "serial", header ="Serial");
+				Column(field = "deviceType.name", header ="Device type");
+				ContentColumn(header="Actions", rowVar = "item"){			
+					
+					span(class="btn-group"){
+						a(href="/device/edit/" + item.id , class="btn btn-info btn-sm"){"Edit";}
+						a(href="/device/control/" + item.id , class="btn btn-warning btn-sm"){"Control";}
+						a(href="/device/delete/" + item.id , class="btn btn-danger btn-sm", onclick="return confirm('Sure?');"){"Delete";}
+					}
+				}
+			}
+		
+			div{
+				a(href="/device/add", class="btn btn-primary btn-sm"){"Add device";}
+			}
+	
+		}
+	}
+}

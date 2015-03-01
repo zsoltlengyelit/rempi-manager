@@ -1,0 +1,12 @@
+import com.landasource.wiidget.library.template.Template;
+import com.landasource.wiidget.library.template.Part;
+import com.landasource.wiidget.library.template.SimplePart;
+
+Template("templates/forms/panel.html"){
+	
+	SimplePart(name = "title", value = this.parent.context.title);
+	
+	Part("content"){
+		`this.parent.content`;
+	}
+}
