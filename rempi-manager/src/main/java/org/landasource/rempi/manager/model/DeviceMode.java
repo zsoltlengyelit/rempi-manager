@@ -19,8 +19,10 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyEnumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Formula;
 import org.landasource.rempi.manager.core.gpio.GpioPin;
 
 /**
@@ -29,7 +31,7 @@ import org.landasource.rempi.manager.core.gpio.GpioPin;
  *
  */
 @Entity
-@Table(name = "device_mode")
+@Table(name = "device_mode", uniqueConstraints = @UniqueConstraint(columnNames = "device_id", name = "unique_for_device"))
 public class DeviceMode implements Serializable {
 
 	/**
@@ -45,6 +47,9 @@ public class DeviceMode implements Serializable {
 	@JoinColumn(name = "device_id")
 	private Device device;
 
+	@Formula("device_id")
+	private Long deviceId;
+
 	/**
 	 * Operation modes.
 	 */
@@ -55,6 +60,16 @@ public class DeviceMode implements Serializable {
 	@Column(name = "gpioPinMode", length = 100, nullable = false)
 	@CollectionTable(name = "operationModes", joinColumns = @JoinColumn(name = "device_mode_id"))
 	private Map<GpioPin, OperationMode> operationModes;
+
+	public DeviceMode(final Device setDevice) {
+		this();
+		this.device = setDevice;
+		this.deviceId = setDevice.getId();
+	}
+
+	public DeviceMode() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -83,11 +98,19 @@ public class DeviceMode implements Serializable {
 		this.operationModes = operationModes;
 	}
 
+	public Long getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(final Long deviceId) {
+		this.deviceId = deviceId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((getDevice() == null) ? 0 : getDevice().hashCode());
+		result = prime * result + ((getDeviceId() == null) ? 0 : getDeviceId().hashCode());
 		return result;
 	}
 
@@ -103,11 +126,11 @@ public class DeviceMode implements Serializable {
 			return false;
 		}
 		final DeviceMode other = (DeviceMode) obj;
-		if (getDevice() == null) {
-			if (other.getDevice() != null) {
+		if (getDeviceId() == null) {
+			if (other.getDeviceId() != null) {
 				return false;
 			}
-		} else if (!getDevice().equals(other.getDevice())) {
+		} else if (!getDeviceId().equals(other.getDeviceId())) {
 			return false;
 		}
 		return true;

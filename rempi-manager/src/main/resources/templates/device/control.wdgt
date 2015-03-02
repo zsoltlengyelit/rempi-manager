@@ -16,9 +16,15 @@ Template("templates/layout/main.html"){
       		foreach(gpio : namedPins){
       			li(class = "list-group-item"){
       				strong(device.wiring.getPinName(gpio.name()) + ": ");
-      				a(rendered =state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/disable"){"Disable";}
-      				a(rendered=state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/auto"){"Auto";}
-      				a(rendered=!state[gpio.name()].isEnabled(), class="btn btn-sm btn-danger", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/enable"){"Enable";}
+      				
+      				span(class="btn-group"){
+	      				foreach(operationMode : operationModes){      				
+	      					
+		      				a(class="btn btn-sm " + ((deviceOperationModes.containsKey(gpio) && deviceOperationModes.get(gpio).equals(operationMode)) ? "btn-success" : "btn-default"), 
+	      					 href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/" + operationMode.name()){`operationMode.name()`;}
+		      				
+	      				}
+      				}
       			}
       		}
       		

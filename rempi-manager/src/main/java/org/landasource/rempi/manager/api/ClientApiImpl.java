@@ -37,7 +37,7 @@ public class ClientApiImpl {
 		}
 
 		final ClientState clientState = new ClientState();
-		final GpioState state = stateStore.getState(serial);
+		final GpioState state = stateStore.getClientState(device);
 		final Set<Entry<GpioPin, PinState>> entrySet = state.entrySet();
 		for (final Entry<GpioPin, PinState> entry : entrySet) {
 			clientState.getGpio().put(entry.getKey(), entry.getValue());

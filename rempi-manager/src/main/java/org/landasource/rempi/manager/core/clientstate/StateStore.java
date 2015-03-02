@@ -1,12 +1,17 @@
 package org.landasource.rempi.manager.core.clientstate;
 
 import java.io.Serializable;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.landasource.rempi.manager.core.gpio.GpioPin;
 import org.landasource.rempi.manager.core.gpio.PinMode;
 import org.landasource.rempi.manager.core.gpio.PinState;
+import org.landasource.rempi.manager.model.Device;
+import org.landasource.rempi.manager.model.DeviceMode;
+import org.landasource.rempi.manager.model.OperationMode;
+import org.landasource.rempi.manager.repo.DeviceRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,37 +25,30 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class StateStore implements Serializable {
 
-	private final ConcurrentMap<String, GpioState> states = new ConcurrentHashMap<String, GpioState>();
+	@Autowired
+	private DeviceManager deviceManager;
 
-	public GpioState getState(final String serial) {
-		initClientState(serial);
-		return states.get(serial);
-	}
+	@Autowired
+	private DeviceRepo deviceRepo;
 
-	/**
-	 *
-	 * @param serial
-	 * @param pin
-	 * @param value
-	 */
-	public void set(final String serial, final GpioPin pin, final boolean value) {
+	public GpioState getClientState(final Device device) {
 
-		initClientState(serial);
-		final GpioState gpioState = states.get(serial);
-		gpioState.put(pin, new PinState(PinMode.OUT, value));
-	}
+		final DeviceMode deviceMode = deviceManager.getDeviceMode(device);
 
-	public boolean isEnabled(final String serial, final GpioPin pin) {
-		initClientState(serial);
-		final PinState pinState = states.get(serial).get(pin);
-		return null != pinState && pinState.isEnabled();
+		final GpioState gpioState = new GpioState();
+		final Map<GpioPin, OperationMode> operationModes = deviceMode.getOperationModes();
 
-	}
+		for (final Entry<GpioPin, OperationMode> modeEntry : operationModes.entrySet()) {
 
-	private void initClientState(final String serial) {
-		if (!states.containsKey(serial)) {
-			states.put(serial, new GpioState());
+			final GpioPin gpioPin = modeEntry.getKey();
+			final OperationMode operationMode = modeEntry.getValue();
+
+			// TODO implement auto mode here
+			final boolean enabled = OperationMode.ON.equals(operationMode);
+			gpioState.put(gpioPin, new PinState(PinMode.OUT, enabled));
 		}
+
+		return gpioState;
 	}
 
 }

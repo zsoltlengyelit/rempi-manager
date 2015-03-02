@@ -5,12 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.landasource.rempi.manager.core.clientstate.GpioState;
-import org.landasource.rempi.manager.core.clientstate.StateStore;
+import org.landasource.rempi.manager.api.http.BadRequestException;
+import org.landasource.rempi.manager.core.clientstate.DeviceManager;
 import org.landasource.rempi.manager.core.controller.CrudController;
 import org.landasource.rempi.manager.core.gpio.GpioPin;
 import org.landasource.rempi.manager.model.Device;
+import org.landasource.rempi.manager.model.DeviceMode;
 import org.landasource.rempi.manager.model.DeviceType;
+import org.landasource.rempi.manager.model.OperationMode;
 import org.landasource.rempi.manager.model.Wiring;
 import org.landasource.rempi.manager.repo.DeviceRepo;
 import org.landasource.rempi.manager.repo.DeviceTypeRepo;
@@ -38,7 +40,8 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 	@Autowired
 	private DeviceTypeRepo deviceTypeRepo;
 	@Autowired
-	private StateStore stateStore;
+	private DeviceManager deviceManager;
+
 	@Autowired
 	private WiringRepo wiringRepo;
 
@@ -58,8 +61,9 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		final Device device = deviceRepo.findOne(id);
 		modelMap.addAttribute("device", device);
 
-		final GpioState state = stateStore.getState(device.getSerial());
-		modelMap.addAttribute("state", state);
+		final DeviceMode deviceMode = deviceManager.getDeviceMode(device);
+		modelMap.addAttribute("deviceOperationModes", deviceMode.getOperationModes());
+		modelMap.addAttribute("operationModes", OperationMode.values());
 
 		final List<GpioPin> namedPins = new ArrayList<GpioPin>(device.getWiring().getPinTable().keySet());
 		Collections.sort(namedPins, new Comparator<GpioPin>() {
@@ -78,15 +82,15 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 	}
 
 	@RequestMapping("control/{id}/gpio/{gpio}/{mode}")
-	public String controlGpio(@PathVariable("id") final Long id, @PathVariable("gpio") final Integer gpio, @PathVariable("mode") final String mode, final ModelMap modelMap) {
+	public String controlGpio(@PathVariable("id") final Long id, @PathVariable("gpio") final Integer gpio, @PathVariable("mode") final OperationMode mode, final ModelMap modelMap) {
 
 		final Device device = deviceRepo.findOne(id);
+		if (null == device) {
+			throw new BadRequestException();
+		}
+		final GpioPin gpioPin = GpioPin.byIndex(gpio);
 
-		final boolean enabled = "enable".equals(mode);
-		stateStore.getState(device.getSerial()).getByGpio(gpio).setEnabled(enabled);
-
-		final GpioState state = stateStore.getState(device.getSerial());
-		modelMap.addAttribute("state", state);
+		deviceManager.setMode(device, gpioPin, mode);
 
 		return "redirect:/device/control/" + id;
 	}
