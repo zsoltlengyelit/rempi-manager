@@ -16,7 +16,7 @@ Template("templates/layout/main.html"){
       		foreach(gpio : namedPins){
       			li(class = "list-group-item"){
       				strong(device.wiring.getPinName(gpio.name()) + ": ");
-      				a(state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/disable"){"Disable";}
+      				a(rendered =state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/disable"){"Disable";}
       				a(rendered=state[gpio.name()].isEnabled(), class="btn btn-sm btn-success", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/auto"){"Auto";}
       				a(rendered=!state[gpio.name()].isEnabled(), class="btn btn-sm btn-danger", href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/enable"){"Enable";}
       			}
