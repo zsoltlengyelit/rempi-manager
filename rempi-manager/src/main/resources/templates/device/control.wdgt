@@ -4,12 +4,18 @@ import com.landasource.wiidget.library.template.Part;
 import templates.forms.panel;
 import templates.forms.inputRow;
 import templates.forms.formGroup;
+import com.landasource.wiidget.library.html.JavaScriptFile;
 
 Template("templates/layout/main.html"){
    
    Part("content"){
       
-      panel(title = "Device"){
+      panel(title = "Device", id="device-panel"){
+    	  
+    	JavaScriptFile(url = request.contextPath + "/js/pages/device/control.js", position = "BODY_END");
+    	"script"(type="text/javascript"){
+    		`"var CONTEXT_PATH = '" + request.contextPath + "';"`;
+    	}
          
       	ul(class="list-group"){
       		
@@ -20,7 +26,7 @@ Template("templates/layout/main.html"){
       				span(class="btn-group"){
 	      				foreach(operationMode : operationModes){      				
 	      					
-		      				a(class="btn btn-sm " + ((deviceOperationModes.containsKey(gpio) && deviceOperationModes.get(gpio).equals(operationMode)) ? "btn-success" : "btn-default"), 
+		      				a(class="gpio-mode-btn btn btn-sm " + ((deviceOperationModes.containsKey(gpio) && deviceOperationModes.get(gpio).equals(operationMode)) ? "btn-success" : "btn-default"), 
 	      					 href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/" + operationMode.name()){`operationMode.name()`;}
 		      				
 	      				}
@@ -37,88 +43,3 @@ Template("templates/layout/main.html"){
       }
    }
 }
-
-/*<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main">
-<head>
-<title>Dashboard</title>
-</head>
-<body>
-   <section layout:fragment="content">
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Panel title</h3>
-   </div>
-   <div class="panel-body">
-
-        <form role="form" method="post" th:object="${form}">
-
-               <div layout:include="forms/html" th:with="field='name', label='Name'">
-                  <input type="text" th:field="*{name}" layout:fragment="input" />
-               </div>
-               
-               <div layout:include="forms/html" th:with="field='serial', label='Serial'">
-                  <input type="text" th:field="*{serial}" layout:fragment="input" />
-               </div>
-         
-         <div class="form-group">
-            <label>Type</label>
-            <select name="deviceTypeId" class="form-control">            
-              <option th:each="type : ${deviceTypes}" th:selected="${type.id == form.deviceTypeId}" th:value="${type.id}" th:text="${type.name}"></option>            
-            </select>
-         </div>
-         
-         <div class="form-group">
-            <label>Wiring</label>
-            <select name="wiringId" class="form-control">            
-                  <option th:each="wiring : ${wirings}" th:selected="${wiring.id == form.wiringId}" th:value="${wiring.id}" th:text="${wiring.name}"></option>            
-            </select>
-            </div>
-         
-                      
-         <button type="submit" class="btn btn-default">Submit</button>
-     
-      </form>
-
-   </div>
-</div>
-
-<a href="/device" class="btn btn-default btn-small">Back</a>
-
-   </section>
-</body>
-</html>
-*/
-
-/*<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/main">
-<head>
-<title>Dashboard</title>
-</head>
-<body>
-   <section layout:fragment="content">
-   
-   
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Control: <b th:text="${device.serial}"></b></h3>
-   </div>
-   <div class="panel-body">
-         
-         <ul class="list-group">           
-            
-               <li class="list-group-item" th:each="gpio : ${namedPins}">
-                     <strong th:text="|${device.wiring.getPinName(gpio.name())}:|"></strong>                  
-                     <a th:if="${state[gpio.name()].isEnabled()}" class="btn btn-small btn-success" th:href="|/device/control/${device.id}/gpio/${gpio.pinNumber}/disable|">Disable</a>                  
-                     <a th:if="${!state[gpio.name()].isEnabled()}" class="btn btn-small btn-danger" th:href="|/device/control/${device.id}/gpio/${gpio.pinNumber}/enable|">Enable</a>                  
-               </li>            
-         </ul>
-   
-   </div>
-</div>
-
-   <a href="/device" class="btn btn-default btn-small">Back</a>
-
-   </section>
-</body>
-</html>*/

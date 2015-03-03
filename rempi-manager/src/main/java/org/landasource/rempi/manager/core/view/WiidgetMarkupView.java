@@ -57,14 +57,14 @@ public class WiidgetMarkupView extends AbstractTemplateView {
 					"Expected a single Wiidget engine bean in the current "
 							+ "Servlet web application context or the parent root context: GroovyMarkupConfigurer is "
 							+ "the usual implementation. This bean may have any name.",
-							ex);
+					ex);
 		}
 	}
 
 	@Override
 	protected void renderMergedTemplateModel(final Map<String, Object> model,
 			final HttpServletRequest request, final HttpServletResponse response)
-					throws Exception {
+			throws Exception {
 
 		final Engine engine = this.getEngine(model, request);
 		engine.getContext().setAll(model);

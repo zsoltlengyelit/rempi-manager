@@ -5,6 +5,7 @@ import com.landasource.wiidget.library.template.SimplePart;
 Template("templates/forms/panel.html"){
 	
 	SimplePart(name = "title", value = this.parent.context.title);
+	SimplePart(id = this.parent.context.id~"main-panel");
 	
 	Part("content"){
 		`this.parent.content`;
