@@ -26,8 +26,7 @@ public class WiidgetMarkupView extends AbstractTemplateView {
 
 		final String url = getUrl();
 
-		return getEngine(null, null).getConfiguration().getFileLoader()
-				.exists(url);
+		return getEngine().getConfiguration().getFileLoader().exists(url);
 
 	}
 
@@ -46,8 +45,7 @@ public class WiidgetMarkupView extends AbstractTemplateView {
 	 * @param request
 	 * @param model
 	 */
-	protected Engine getEngine(final Map<String, Object> model,
-			final HttpServletRequest request) throws BeansException {
+	protected Engine getEngine() throws BeansException {
 
 		try {
 			return BeanFactoryUtils.beanOfTypeIncludingAncestors(
@@ -66,7 +64,7 @@ public class WiidgetMarkupView extends AbstractTemplateView {
 			final HttpServletRequest request, final HttpServletResponse response)
 			throws Exception {
 
-		final Engine engine = this.getEngine(model, request);
+		final Engine engine = this.getEngine();
 		engine.getContext().setAll(model);
 		engine.getContext().set("request", request);
 		engine.getContext().set("applicationContext", getApplicationContext());
