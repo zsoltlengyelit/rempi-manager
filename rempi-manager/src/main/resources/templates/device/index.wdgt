@@ -13,7 +13,7 @@ Template("templates/layout/main.html"){
 			
 			Table(class="table table-hover table-striped", value=items){
 				
-				Column(field = "id", header ="ID");
+				Column(field = "id", header = msg["col.id"]);
 				Column(field = "name", header ="Name");
 				Column(field = "serial", header ="Serial");
 				Column(field = "deviceType.name", header ="Device type");
@@ -24,7 +24,9 @@ Template("templates/layout/main.html"){
 						a(href="/device/control/" + item.id , class="btn btn-warning btn-sm"){"Control";}
 						a(href="/device/delete/" + item.id , class="btn btn-danger btn-sm", onclick="return confirm('Sure?');"){"Delete";}
 					}
+					
 				}
+				
 			}
 		
 			div{
