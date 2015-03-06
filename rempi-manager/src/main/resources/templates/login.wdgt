@@ -3,7 +3,7 @@ import templates.forms.formGroup;
 "<!DOCTYPE html>";
 "html"(lang = "en"){
 
-	 Include("templates/loginHead.html");
+	 Template("templates/loginHead.html");
 	
 	"body"{
 	
