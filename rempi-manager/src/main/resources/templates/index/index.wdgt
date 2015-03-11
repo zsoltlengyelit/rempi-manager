@@ -1,10 +1,16 @@
 import com.landasource.wiidget.library.template.Template;
 import com.landasource.wiidget.library.template.Part;
+import org.landasource.rempi.manager.core.view.wiidgets.Code;
 
 Template("templates/layout/main.html"){
 	
 	Part("content"){
 		
-		p("Dashboard");	
+	    Code{
+	        
+            p("Dashboard11");
+            p("Dashboard22");
+        
+	    }
 	}
 }
