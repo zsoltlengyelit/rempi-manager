@@ -12,6 +12,7 @@ import com.landasource.wiidget.engine.configuration.Configuration;
 import com.landasource.wiidget.library.template.Part;
 import com.landasource.wiidget.library.template.SimplePart;
 import com.landasource.wiidget.library.template.Template;
+import com.landasource.wiidget.util.Properties;
 
 /**
  *
@@ -22,24 +23,32 @@ import com.landasource.wiidget.library.template.Template;
 @Scope(org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST)
 public class SpringEngine extends DefaultEngine implements InitializingBean {
 
-    @Autowired
-    private SpringWiidgetConfiguration conf;
+	@Autowired
+	private SpringWiidgetConfiguration conf;
 
-    @Override
-    public Configuration getConfiguration() {
-        return conf;
-    }
+	@Autowired
+	private SpringWiidgetProperties props;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        getConfiguration().addDefaultImport(Out.class);
+	@Override
+	public Configuration getConfiguration() {
+		return conf;
+	}
 
-        // templating
-        getConfiguration().addDefaultImport(Template.class);
-        getConfiguration().addDefaultImport(Part.class);
-        getConfiguration().addDefaultImport(SimplePart.class);
-        getConfiguration().addDefaultImport(Include.class);
+	@Override
+	public Properties getProperties() {
+		return props;
+	}
 
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		getConfiguration().addDefaultImport(Out.class);
+
+		// templating
+		getConfiguration().addDefaultImport(Template.class);
+		getConfiguration().addDefaultImport(Part.class);
+		getConfiguration().addDefaultImport(SimplePart.class);
+		getConfiguration().addDefaultImport(Include.class);
+
+	}
 
 }

@@ -10,14 +10,17 @@ import org.landasource.rempi.manager.core.clientstate.DeviceManager;
 import org.landasource.rempi.manager.core.controller.CrudController;
 import org.landasource.rempi.manager.core.gpio.GpioPin;
 import org.landasource.rempi.manager.model.Device;
+import org.landasource.rempi.manager.model.DeviceMetadata;
 import org.landasource.rempi.manager.model.DeviceMode;
 import org.landasource.rempi.manager.model.DeviceType;
 import org.landasource.rempi.manager.model.OperationMode;
 import org.landasource.rempi.manager.model.Wiring;
+import org.landasource.rempi.manager.repo.DeviceMetadataRepo;
 import org.landasource.rempi.manager.repo.DeviceRepo;
 import org.landasource.rempi.manager.repo.DeviceTypeRepo;
 import org.landasource.rempi.manager.repo.WiringRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +28,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  *
@@ -32,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  */
 @Controller
+@Scope(value = WebApplicationContext.SCOPE_REQUEST)
 @RequestMapping("/device")
 public class DeviceController extends CrudController<Device, DeviceForm> {
 
@@ -40,10 +45,14 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 	@Autowired
 	private DeviceTypeRepo deviceTypeRepo;
 	@Autowired
+	private DeviceMetadataRepo deviceMetaDataRepo;
+
+	@Autowired
 	private DeviceManager deviceManager;
 
 	@Autowired
 	private WiringRepo wiringRepo;
+	private DeviceMetadata deviceMetadata;
 
 	@Override
 	protected CrudRepository<Device, Long> getRepo() {
@@ -67,7 +76,6 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 
 		final List<GpioPin> namedPins = new ArrayList<GpioPin>(device.getWiring().getPinTable().keySet());
 		Collections.sort(namedPins, new Comparator<GpioPin>() {
-
 			@Override
 			public int compare(final GpioPin o1, final GpioPin o2) {
 				final String n1 = device.getWiring().getPinTable().get(o1);
@@ -118,6 +126,10 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		form.setSerial(model.getSerial());
 		form.setDeviceTypeId(model.getDeviceType().getId());
 		form.setWiringId(model.getWiring().getId());
+
+		final DeviceMetadata deviceMetadata = getMetaData(model);
+		form.setNotes(deviceMetadata.getNotes());
+
 	}
 
 	@Override
@@ -126,6 +138,8 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		model.setSerial(form.getSerial());
 		model.setDeviceType(deviceTypeRepo.findOne(form.getDeviceTypeId()));
 		model.setWiring(wiringRepo.findOne(form.getWiringId()));
+
+		getMetaData(model).setNotes(form.getNotes());
 	}
 
 	@Override
@@ -136,6 +150,31 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		final Iterable<Wiring> wirings = wiringRepo.findAll();
 		modelMap.addAttribute("wirings", wirings);
 
+	}
+
+	private DeviceMetadata getMetaData(final Device model) {
+		deviceMetadata = deviceMetaDataRepo.findByDeviceId(model.getId());
+
+		if (null == deviceMetadata) {
+			deviceMetadata = new DeviceMetadata();
+			deviceMetadata.setDevice(model);
+		}
+
+		return deviceMetadata;
+	}
+
+	@Override
+	protected void afterModelSave(final Device model) {
+		if (null != deviceMetadata) {
+			deviceMetaDataRepo.save(deviceMetadata);
+		}
+	}
+
+	@Override
+	protected void afterModelUpdate(final Device model) {
+		if (null != deviceMetadata) {
+			deviceMetaDataRepo.save(deviceMetadata);
+		}
 	}
 
 }

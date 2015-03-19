@@ -13,6 +13,6 @@ public class SampleService {
 	private static final Logger LOG = LoggerFactory.getLogger(SampleService.class);
 
 	public void hello() {
-		LOG.info("Hello World!");
+		// LOG.info("Hello World!");
 	}
 }

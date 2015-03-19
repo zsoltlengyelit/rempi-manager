@@ -1,5 +1,6 @@
 package org.landasource.rempi.manager.api;
 
+import java.util.Calendar;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -8,7 +9,10 @@ import org.landasource.rempi.manager.core.clientstate.GpioState;
 import org.landasource.rempi.manager.core.clientstate.StateStore;
 import org.landasource.rempi.manager.core.gpio.GpioPin;
 import org.landasource.rempi.manager.core.gpio.PinState;
+import org.landasource.rempi.manager.core.notifications.device.DeviceCheckinNotifier;
 import org.landasource.rempi.manager.model.Device;
+import org.landasource.rempi.manager.model.DeviceMetadata;
+import org.landasource.rempi.manager.repo.DeviceMetadataRepo;
 import org.landasource.rempi.manager.repo.DeviceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,6 +31,12 @@ public class ClientApiImpl {
 	@Autowired
 	private DeviceRepo deviceRepo;
 
+	@Autowired
+	private DeviceCheckinNotifier deviceCheckinNotifier;
+
+	@Autowired
+	private DeviceMetadataRepo deviceMetaDataRepo;
+
 	@ResponseBody
 	@RequestMapping(value = "/{clientId}/state", method = RequestMethod.GET, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
 	public ClientState getClientState(@PathVariable("clientId") final String serial) {
@@ -42,6 +52,12 @@ public class ClientApiImpl {
 		for (final Entry<GpioPin, PinState> entry : entrySet) {
 			clientState.getGpio().put(entry.getKey(), entry.getValue());
 		}
+
+		final DeviceMetadata metadata = deviceMetaDataRepo.findByDeviceId(device.getId());
+		metadata.setLastCheckin(Calendar.getInstance().getTime());
+		deviceMetaDataRepo.save(metadata);
+
+		deviceCheckinNotifier.deviceCheckedIn(device);
 
 		return clientState;
 	}

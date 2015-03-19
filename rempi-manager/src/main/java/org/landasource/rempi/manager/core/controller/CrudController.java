@@ -81,7 +81,14 @@ public abstract class CrudController<Model, Form> {
 
 		getRepo().save(model);
 
+		afterModelSave(model);
+
 		return redirectIndex();
+	}
+
+	protected void afterModelSave(final Model model) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Transactional
@@ -138,7 +145,13 @@ public abstract class CrudController<Model, Form> {
 
 		getRepo().save(model);
 
+		afterModelUpdate(model);
+
 		return redirectIndex();
+	}
+
+	protected void afterModelUpdate(final Model model) {
+		// TODO Auto-generated method stub
 	}
 
 	@Transactional

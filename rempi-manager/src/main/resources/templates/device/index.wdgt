@@ -4,6 +4,8 @@ import templates.forms.panel;
 import com.landasource.wiidget.library.html.table.Table;
 import com.landasource.wiidget.library.html.table.Column;
 import com.landasource.wiidget.library.html.table.ContentColumn;
+import com.landasource.wiidget.library.html.JavaScriptFile;
+import com.landasource.wiidget.library.html.CssFile;
 
 Template("templates/layout/main.html"){
 	
@@ -17,6 +19,9 @@ Template("templates/layout/main.html"){
 				Column(field = "name", header ="Name");
 				Column(field = "serial", header ="Serial");
 				Column(field = "deviceType.name", header ="Device type");
+				ContentColumn(header="State", rowVar="item"){
+					span(class="device-status", id= "device-status-" + item.id);
+				}
 				ContentColumn(header="Actions", rowVar = "item"){			
 					
 					span(class="btn-group"){
@@ -34,5 +39,11 @@ Template("templates/layout/main.html"){
 			}
 	
 		}
+		
+		JavaScriptFile(url = request.contextPath + "/js/plugins/socket/sockjs.js", position = "BODY_END");
+		JavaScriptFile(url = request.contextPath + "/js/plugins/socket/stomp.js", position = "BODY_END");
+		JavaScriptFile(url = request.contextPath + "/js/pages/device/list.js", position = "BODY_END");
+		CssFile(request.contextPath + "/css/pages/device/list.css");
+		
 	}
 }
