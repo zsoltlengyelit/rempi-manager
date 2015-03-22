@@ -4,7 +4,7 @@ var getopt = require('node-getopt').create([
         ['h' , 'host=ARG'              , 'API URL (e.g. "92.168.2.10"'],
         ['p', 'port=ARG'               , 'API port'],
         ['d', 'delay=ARG'              , 'Refresh delay in seconds'],
-        ['c', 'clientId=ARG'           , 'long option.'],
+        ['', 'clientId[=ARG]'           , 'long option.'],
         ['s', 'simulate'			   , 'Simulates GPIO functions.'],
 //
 //  [''  , 'color[=COLOR]'       , 'COLOR is optional'],

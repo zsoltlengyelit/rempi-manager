@@ -11,6 +11,7 @@
   "devDependencies": {
     "pi-gpio": "0.0.6",
     "node-getopt": "~0.2.3",
-    "underscore": "~1.7.0"
+    "underscore": "~1.7.0",
+    "exec": "~0.2.0"
   }
 }
