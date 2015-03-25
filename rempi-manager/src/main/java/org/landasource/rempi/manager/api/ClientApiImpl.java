@@ -1,10 +1,9 @@
 package org.landasource.rempi.manager.api;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import net.wimpi.telnetd.io.terminal.ansi;
 
 import org.landasource.rempi.manager.api.http.BadRequestException;
 import org.landasource.rempi.manager.core.clientstate.GpioState;
@@ -81,7 +80,8 @@ public class ClientApiImpl {
 			hexState.setCharAt(key.getPinNumber(), enabled ? '1' : '0');
 		}
 
-		final int binState = Integer.parseInt(hexState.toString(), 2);
-		return Integer.toHexString(binState);
+		final String binString = hexState.toString().replaceFirst("^0+(?!$)", "");
+		return new BigInteger(binString, 2).toString(16);
+
 	}
 }
