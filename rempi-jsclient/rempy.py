@@ -15,6 +15,7 @@ print "Serial: " + serial
 GPIO.setmode(GPIO.BCM)
 validPins = [2,3,4,14,15,17,18,27,22,23,24,10,9,25,11,8,7,5,6,12,13,19,16,26,20,21]
 
+time.sleep(20) # wait for 3g
 
 def close_pins():
 	for gpioNum in validPins:
