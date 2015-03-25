@@ -34,6 +34,15 @@ Template("templates/layout/main.html"){
       			}
       		}
       		
+      		formGroup(label="", field="active"){
+      			
+      			label{
+      				input(name="active", class="", type="checkbox", checked="checked", rendered=form.active);
+      				input(name="active", class="", type="checkbox", rendered=!form.active);
+      				"Active";
+      			}
+      		}
+      		
       		formGroup(label="notes", field="notes"){
       			textarea(name="notes", class="form-control"){
       				Out(form.notes);

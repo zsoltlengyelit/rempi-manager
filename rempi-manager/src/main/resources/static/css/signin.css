@@ -2,7 +2,12 @@
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
-}
+  background: url('../images/plants.jpg') no-repeat center center fixed;  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
 
 .form-signin {
   max-width: 330px;
@@ -37,5 +42,9 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+label{
+	color: white;
 }
  

@@ -19,6 +19,9 @@ Template("templates/layout/main.html"){
 				Column(field = "name", header ="Name");
 				Column(field = "serial", header ="Serial");
 				Column(field = "deviceType.name", header ="Device type");
+				ContentColumn(header="Active", rowVar="item"){
+					i(class="glyphicon " + (item.active ? "glyphicon-ok" : "glyphicon-remove"));
+				}
 				ContentColumn(header="State", rowVar="item"){
 					span(class="device-status", id= "device-status-" + item.id);
 				}
@@ -27,7 +30,7 @@ Template("templates/layout/main.html"){
 					span(class="btn-group"){
 						a(href="/device/edit/" + item.id , class="btn btn-info btn-sm"){"Edit";}
 						a(href="/device/control/" + item.id , class="btn btn-warning btn-sm"){"Control";}
-						a(href="/device/delete/" + item.id , class="btn btn-danger btn-sm", onclick="return confirm('Sure?');"){"Delete";}
+						//TODO delete a(href="/device/delete/" + item.id , class="btn btn-danger btn-sm", onclick="return confirm('Sure?');"){"Delete";}
 					}
 					
 				}

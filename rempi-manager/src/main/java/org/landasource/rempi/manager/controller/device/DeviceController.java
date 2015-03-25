@@ -126,6 +126,7 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		form.setSerial(model.getSerial());
 		form.setDeviceTypeId(model.getDeviceType().getId());
 		form.setWiringId(model.getWiring().getId());
+		form.setActive(model.isActive());
 
 		final DeviceMetadata deviceMetadata = getMetaData(model);
 		form.setNotes(deviceMetadata.getNotes());
@@ -138,6 +139,7 @@ public class DeviceController extends CrudController<Device, DeviceForm> {
 		model.setSerial(form.getSerial());
 		model.setDeviceType(deviceTypeRepo.findOne(form.getDeviceTypeId()));
 		model.setWiring(wiringRepo.findOne(form.getWiringId()));
+		model.setActive(form.isActive());
 
 		getMetaData(model).setNotes(form.getNotes());
 	}

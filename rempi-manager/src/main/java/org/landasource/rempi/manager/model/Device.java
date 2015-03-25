@@ -39,6 +39,8 @@ public class Device implements Serializable {
 	@NotEmpty
 	private String serial;
 
+	private boolean active;
+
 	@ManyToOne
 	@NotNull
 	@JoinColumn(name = "wiring_id")
@@ -87,6 +89,14 @@ public class Device implements Serializable {
 
 	public void setWiring(final Wiring wiring) {
 		this.wiring = wiring;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 
 	@Override

@@ -1,4 +1,5 @@
 import com.landasource.wiidget.library.template.Template;
+import templates.index.components.panel as Panel;
 import com.landasource.wiidget.library.template.Part;
 import org.landasource.rempi.manager.core.view.wiidgets.Code;
 
@@ -6,11 +7,20 @@ Template("templates/layout/main.html"){
 	
 	Part("content"){
 		
-	    Code{
-	        
-            p("Dashboard11");
-            p("Dashboard22");
-        
-	    }
+//	    Code{
+//	        
+//            p("Dashboard11");
+//            p("Dashboard22");
+//        
+//	    }
+		
+		dashboard(){
+			
+			Panel{
+				
+			}
+			
+		}
+		
 	}
 }

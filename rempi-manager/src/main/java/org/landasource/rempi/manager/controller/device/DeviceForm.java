@@ -27,6 +27,8 @@ public class DeviceForm {
 
 	private String notes;
 
+	private boolean active;
+
 	public String getName() {
 		return name;
 	}
@@ -65,6 +67,14 @@ public class DeviceForm {
 
 	public void setNotes(final String notes) {
 		this.notes = notes;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(final boolean active) {
+		this.active = active;
 	}
 
 }
