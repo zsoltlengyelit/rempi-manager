@@ -1,0 +1,15 @@
+import com.landasource.wiidget.library.html.JavaScriptFile;
+import com.landasource.wiidget.library.html.CssFile;
+
+JavaScriptFile(url = request.contextPath + "/semantic/components/checkbox.js", position = "BODY_END");
+CssFile(url = request.contextPath + "/semantic/components/checkbox.min.css", position = "HEAD_END");
+
+div(class="ui toggle checkbox"){
+	input(name=name, class="", type="checkbox", checked="checked", rendered=checked);
+	input(name=name, class="", type="checkbox", rendered=!checked);
+   label(for=name){Out(this.content);}
+}
+
+script(type="application/javascript"){
+Out(" jQuery( function() { jQuery('.ui.checkbox').checkbox(); } );");
+}

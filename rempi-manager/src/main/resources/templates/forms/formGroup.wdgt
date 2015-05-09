@@ -3,9 +3,9 @@
  * @author lzsolt
  */ 
 
-"div"(class="form-group"){
-	"label"(for = field){`label`;}	
-	`this.content`;
+div(class="field"){
+	label(for = field){`label`;}	
+	Out(this.content);
 }
 
 //`this.toString()`; <- link ResourceWiidget

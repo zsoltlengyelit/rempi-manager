@@ -1,33 +1,47 @@
 import templates.forms.formGroup;
 
 "<!DOCTYPE html>";
-"html"(lang = "en"){
+html(lang = "en"){
 
 	 Template("templates/loginHead.html");
 	
-	"body"{
+	body{
 	
-		"div"(class="container"){
+		div(class="ui  segment"){
 		
-			"form"(class="form-signin", method="post"){
-			    
-			   
-						
-				Out(value = "Error: " + error, rendered = error != null);
-			
-				foreach(field -> label : {username : "Username", password : "Password"}){
+		div(class="ui one column stackable center aligned page grid"){
+			div(class="column six wide"){
 				
-					formGroup(label = label, field=field){					
-						"input"(type = field == "password" ? "password" : "text", name=field, class="form-control");			
+					
+				 h2(class="ui dividing header"){Out("Rempi");}
+		
+				form(class="ui left aligned form", method="post"){			
+					
+					div(class="ui segment"){
+						
+					div(rendered = error != null, class="ui message red"){Out(value = "Error: " + error);}
+				
+					div(class=""){
+						foreach(field -> label : {username : "Username", password : "Password"}){
+						
+							formGroup(label = "", field=field){					
+								"input"(type = field == "password" ? "password" : "text", name=field, class="form-control");			
+							}
+						}
+					}
+					
+					
+				}
+					div(class="ui bottom attached"){
+						
+						button(class="ui fluid green button", type="submit"){"Sign in";}
 					}
 				}
-								
-				button(class="btn btn-lg btn-primary btn-block", type="submit"){"Sign in";}
-				
-			} // form
+			}
 				
 		} // container
 		
+	}
 	}
 }
 

@@ -1,6 +1,12 @@
-<div class="panel panel-default" id="{{id}}">
-   <div class="panel-heading">
-      <h3 class="panel-title">{{title}}</h3>
+<div class="ui segments">
+<div class="ui segment">
+   <div class="ui huge breadcrumb">
+     <a class="section">{{this.parent.context.title}}</a>
+     <i class="right chevron icon divider"></i>  
    </div>
-   <div class="panel-body">{{content}}</div>
+</div>
+
+<div class="ui segment" id="{{this.parent.context.id~"main-panel"}}">
+   {{content}}
+</div>
 </div>

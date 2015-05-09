@@ -1,0 +1,25 @@
+"div"(class="ui vertical pointing menu"){
+   div(class="item"){
+      div(class="ui input"){
+         "input"(type="text", placeholder="Search...");
+      }
+   }
+
+   a(class="item"){
+      i(class="home icon"); 
+      Out("Home");      
+   }
+   div(class="item"){
+      i(class="cubes icon"); 
+      Out("Devices");
+      div(class="menu"){    
+      	a(class="item", href=request.contextPath + "/device"){Out("List");}
+         a(class="item", href=request.contextPath + "/device/add"){Out("Add");}         
+      }
+   }
+   a(class="item", href= contextPath + "/logout"){
+      i(class="key icon"); 
+      Out("Logout");      
+   }
+   
+}

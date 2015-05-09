@@ -12,21 +12,22 @@ Template("templates/layout/main.html"){
       
       panel(title = "Device", id="device-panel"){
     	  
-    	JavaScriptFile(url = request.contextPath + "/js/pages/device/control.js", position = "BODY_END");
-    	"script"(type="text/javascript"){
-    		`"var CONTEXT_PATH = '" + request.contextPath + "';"`;
-    	}
-         
-      	ul(class="list-group"){
+	    	JavaScriptFile(url = request.contextPath + "/js/pages/device/control.js", position = "BODY_END");
+	    	
+	    	script(type="text/javascript"){
+	    		`"var CONTEXT_PATH = '" + request.contextPath + "';"`;
+	    	}
+	         
+      	ul(class="ui list"){
       		
       		foreach(gpio : namedPins){
-      			li(class = "list-group-item"){
+      			li(class = "item"){
       				strong(device.wiring.getPinName(gpio.name()) + ": ");
       				
-      				span(class="btn-group"){
+      				span(class="ui buttons"){
 	      				foreach(operationMode : operationModes){      				
 	      					
-		      				a(class="gpio-mode-btn btn btn-sm " + ((deviceOperationModes.containsKey(gpio) && deviceOperationModes.get(gpio).equals(operationMode)) ? "btn-success" : "btn-default"), 
+		      				a(class="gpio-mode-btn ui button small " + ((deviceOperationModes.containsKey(gpio) && deviceOperationModes.get(gpio).equals(operationMode)) ? "positive" : "negative"), 
 	      					 href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/" + operationMode.name()){`operationMode.name()`;}
 		      				
 	      				}
