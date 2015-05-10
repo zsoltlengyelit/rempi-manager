@@ -5,6 +5,7 @@ import templates.forms.panel;
 import templates.forms.inputRow;
 import templates.forms.formGroup;
 import com.landasource.wiidget.library.html.JavaScriptFile;
+import com.landasource.wiidget.commons.Set;
 
 Template("templates/layout/main.html"){
    
@@ -18,17 +19,27 @@ Template("templates/layout/main.html"){
 	    		`"var CONTEXT_PATH = '" + request.contextPath + "';"`;
 	    	}
 	         
-      	ul(class="ui list"){
+      	div(class="ui list"){
       		
       		foreach(gpio : namedPins){
-      			li(class = "item"){
+      			div(class = "item"){
       				strong(device.wiring.getPinName(gpio.name()) + ": ");
       				
-      				span(class="ui buttons"){
-	      				foreach(operationMode : operationModes){      				
-	      					
-		      				a(class="gpio-mode-btn ui button small " + ((deviceOperationModes.containsKey(gpio) && deviceOperationModes.get(gpio).equals(operationMode)) ? "positive" : "negative"), 
-	      					 href="/device/control/" + device.id + "/gpio/" + gpio.pinNumber + "/" + operationMode.name()){`operationMode.name()`;}
+      				span(class="ui red buttons"){      				
+	      						      					
+	      					div(class="ui compact menu"){
+	      						div(class="ui simple dropdown item"){
+	      							Out(deviceOperationModes.get(gpio) ~ "OFF");
+	      							i(class="dropdown icon");	      							
+	      							
+	      							div(class="menu"){
+	      								foreach(operationMode : operationModes){
+			      							a(class="gpio-mode-btn item", 
+			      								href="/device/control/{{device.id}}/gpio/{{gpio.pinNumber}}/{{operationMode.name()}}"){`operationMode.name()`;}
+			      						}
+	      							}
+	      						}
+	      					}
 		      				
 	      				}
       				}
@@ -43,4 +54,3 @@ Template("templates/layout/main.html"){
    	
       }
    }
-}
