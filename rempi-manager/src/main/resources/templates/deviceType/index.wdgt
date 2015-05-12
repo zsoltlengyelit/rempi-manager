@@ -11,15 +11,22 @@ Template("templates/layout/main.html"){
 		
 		panel(title = "Device types"){
 			
-			Table(class="table table-hover table-striped", value=items){
+			Table(class="ui table", value=items){
 				
 				Column(field = "id", header ="ID");
 				Column(field = "name", header ="Name");
 				ContentColumn(header="Actions", rowVar = "item"){			
 					
 					span(class="btn-group"){
-						a(href="/admin/deviceType/edit/" + item.id , class="btn btn-info btn-sm"){"Edit";}
-						a(href="/admin/deviceType/delete/" + item.id , class="btn btn-danger btn-sm", onclick="return confirm('Sure?');"){"Delete";}
+						
+						a(class="ui labeled mini orange icon button", href="{{request.contextPath}}/admin/deviceType/edit/{{item.id}}"){
+							i(class="ui sign in icon");
+							Out("Edit");
+						}		
+						a(href="/admin/deviceType/delete/" + item.id , class="ui labeled mini red icon button", onclick="return confirm('Sure?');"){
+							i(class="ui trash icon");
+							"Delete";
+						}
 					}
 				}
 			}

@@ -2,24 +2,24 @@ import com.landasource.wiidget.library.template.Template;
 import com.landasource.wiidget.library.template.Part;
 import templates.forms.panel;
 import templates.forms.inputRow;
+import templates.forms.checkbox;
 import templates.forms.formGroup;
 
 Template("templates/layout/main.html"){
    
    Part("content"){
       
-      panel(title = "Wiring"){
+      panel(title = "User"){
          
-      	form(method = "post"){
+      	form(method = "post", class="ui form"){
       		
       		inputRow(label="Username", field="username", model = form);
       		inputRow(label="Full name", field="fullName", model = form);
       		inputRow(label="Password", field="name", value = ""); // password is never passed
       		
-      		formGroup(label="Active:", field="enabled"){
-      			label(class="checkbox-inline"){
-      				input(type="checkbox", checked="checked", name="enabled", rendered=form.enabled);
-      				input(type="checkbox", name="enabled", rendered=!form.enabled);
+   			formGroup(label="", field="enabled"){
+      			
+      			checkbox(checked=form.enabled, name="enabled"){
       				"Active";
       			}
       		}

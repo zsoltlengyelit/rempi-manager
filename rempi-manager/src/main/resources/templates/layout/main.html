@@ -16,24 +16,21 @@
 
 </head>
 <body>
+      <table class="ui basic table tablet stackable">
+         <tr class="row">
 
-   <div class="ui page segment">
+            <td width="1%" class="">
+            
+               {{include.include(fileTool.getFile("menu.wdgt", this.directory))}}
+            
+            </td>
 
-      <div class="ui grid">
+            <td class="top aligned">
+            {{content}}
+            </td> 
+         </tr>
+      </table>
 
-         <div class="three wide column">
-         
-            {{include.include(fileTool.getFile("menu.wdgt", this.directory))}}
-         
-         </div>
-
-         <div class="thirteen wide column">
-         {{content}}
-         </div>
-
-      </div>
-
-   </div>
 </body>
 
 </html>

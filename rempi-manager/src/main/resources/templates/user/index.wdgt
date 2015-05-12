@@ -9,9 +9,9 @@ Template("templates/layout/main.html"){
 	
 	Part("content"){
 		
-		panel(title = "Wirings"){
+		panel(title = "User"){
 			
-			Table(class="table table-hover table-striped", value=items){
+			Table(class="ui table", value=items){
 				
 				Column(field = "id", header ="ID");
 				Column(field = "fullName", header ="Name");
