@@ -1,47 +1,53 @@
 import templates.forms.formGroup;
 
 "<!DOCTYPE html>";
-html(lang = "en"){
+html(lang = "en") {
 
-	 Template("templates/loginHead.html");
-	
-	body{
-	
-		div(class="ui  segment"){
-		
-		div(class="ui one column stackable center aligned page grid"){
-			div(class="column six wide"){
-				
-					
-				 h2(class="ui dividing header"){Out("Rempi");}
-		
-				form(class="ui left aligned form", method="post"){			
-					
-					div(class="ui segment"){
-						
-					div(rendered = error != null, class="ui message red"){Out(value = "Error: " + error);}
-				
-					div(class=""){
-						foreach(field -> label : {username : "Username", password : "Password"}){
-						
-							formGroup(label = "", field=field){					
-								"input"(type = field == "password" ? "password" : "text", name=field, class="form-control");			
-							}
-						}
-					}
-					
-					
-				}
-					div(class="ui bottom attached"){
-						
-						button(class="ui fluid green button", type="submit"){"Sign in";}
-					}
-				}
-			}
-				
-		} // container
-		
-	}
-	}
+    Template("templates/loginHead.html");
+
+    body {
+
+        div(class = "container-fluid container") {
+
+            div(class = "row") {
+                div(class = "col-sm-4 col-sm-offset-4") {
+
+                    div(class = "panel") {
+
+                        h2(class = "ui dividing header") { Out("Rempi"); }
+
+                        form(class = "ui left aligned form", method = "post") {
+
+                            div(class = "ui segment") {
+
+                                div(rendered = error != null, class = "ui message red") {
+                                    Out(value = "Error: " + error);
+                                }
+
+                                div(class = "") {
+                                    foreach(field -> label: {
+                                        username: "Username",
+                                        password: "Password"
+                                    }) {
+
+                                        formGroup(label = "", field = field) {
+                                            "input"(type = field == "password" ? "password" : "text", name = field, class = "form-control");
+                                        }
+                                    }
+                                }
+
+
+                            }
+                            div(class = "ui bottom attached") {
+                                button(class = "btn bt-primary", type = "submit") { "Sign in"; }
+                            }
+                        }
+                    }
+                }
+
+            } // container
+
+        }
+    }
 }
 
