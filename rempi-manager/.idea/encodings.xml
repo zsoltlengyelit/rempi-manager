@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/less/bootstrap" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/less/bootstrap.less" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/less/variables.less" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/fonts" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap.js" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/../../wiidget-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../wiidget-library" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/rempi-manager.iml" filepath="$PROJECT_DIR$/rempi-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../wiidget-core/wiidget.iml" filepath="$PROJECT_DIR$/../../wiidget-core/wiidget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../wiidget-library/wiidget-library.iml" filepath="$PROJECT_DIR$/../../wiidget-library/wiidget-library.iml" />
+    </modules>
+  </component>
+</project>
