@@ -19,30 +19,32 @@ Template("templates/layout/main.html"){
 	    		`"var CONTEXT_PATH = '" + request.contextPath + "';"`;
 	    	}
 	         
-      	div(class="ui list"){
+      div(class="ui list"){
       		
       		foreach(gpio : namedPins){
       			div(class = "item"){
       				strong(device.wiring.getPinName(gpio.name()) + ": ");
       				
-      				span(class="ui red buttons"){      				
-	      						      					
-	      					div(class="ui compact menu"){
-	      						div(class="ui simple dropdown item"){
-	      							Out(deviceOperationModes.get(gpio) ~ "OFF");
-	      							i(class="dropdown icon");	      							
-	      							
-	      							div(class="menu"){
-	      								foreach(operationMode : operationModes){
-			      							a(class="gpio-mode-btn item", 
-			      								href="/device/control/{{device.id}}/gpio/{{gpio.pinNumber}}/{{operationMode.name()}}"){`operationMode.name()`;}
-			      						}
-	      							}
-	      						}
-	      					}
-		      				
-	      				}
-      				}
+      				Set(name="ioState" , value = deviceOperationModes.get(gpio) ~ "OFF");
+      				      				
+      				div(class="btn-group"){
+      				    button(type="button", class="btn dropdown-toggle " + {"OFF": "btn-danger", "ON": "btn-success", "AUTO": "btn-info"}[ioState.toString()], 
+      				            style="width:100px;", "data-toggle"="dropdown", "aria-haspopup"="true", "aria-expanded"="false"){
+      				        Out(ioState);
+      				        
+      				        span(class="caret");
+      				    } // end of button.btn.btn-default.dropdown-toggle
+      				    ul(class="dropdown-menu"){
+      				      foreach(operationMode : operationModes){
+                              li {
+                                  a(class="gpio-mode-btn item", 
+                                    href="/device/control/{{device.id}}/gpio/{{gpio.pinNumber}}/{{operationMode.name()}}")
+                                          {`operationMode.name()`;}
+                              }
+                          }
+      				    } // end of ul.dropdown-menu
+      				} // end of div.btn-group
+      			      			
       			}
       		}
       		
@@ -54,3 +56,4 @@ Template("templates/layout/main.html"){
    	
       }
    }
+

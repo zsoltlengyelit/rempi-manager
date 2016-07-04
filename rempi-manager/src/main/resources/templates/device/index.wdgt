@@ -4,14 +4,15 @@ import com.landasource.wiidget.library.template.DynamicPart;
 import templates.forms.panel;
 import templates.forms.list.Item;
 import templates.forms.list.ItemList;
-import com.landasource.wiidget.library.html.table.Table;
 import com.landasource.wiidget.library.html.table.Column;
+import com.landasource.wiidget.library.html.table.Table;
 import com.landasource.wiidget.library.html.table.ContentColumn;
 import com.landasource.wiidget.library.html.JavaScriptFile;
 import com.landasource.wiidget.library.html.CssFile;
 
 Template("templates/layout/main.html"){
 	
+    
 	Part("content"){
 		
 		panel(title = "Devices"){
@@ -23,31 +24,24 @@ Template("templates/layout/main.html"){
 				
 			}
 			
-			ItemList(items = items){
-		
-				foreach(item : items){
-							
-					Item(title = $title.render({item : item}), link="{{request.contextPath}}/device/control/" + item.id){
-														
-						div(class="descripton"){
-							span(class="device-status", id= "device-status-" + item.id);
-						}
+			Table(class="ui table", value = items){
+				
+			    Column(field = "id", header ="ID");
+                ContentColumn(rowVar = "item", header ="Name") {
+                    a(href="/device/control/" + item.id){ "{{item.name}}"; }
+                }
+                Column(field = "serial", header ="Serial");          
+                ContentColumn(header="Actions", rowVar = "item"){           
+                    
+                    span(class="btn-group"){
+                        a(href="/device/edit/" + item.id , class="btn btn-info btn-sm"){"Edit";}
+                        a(href="/device/delete/" + item.id , class="btn btn-danger btn-sm", onclick="return confirm('Sure?');"){"Delete";}
+                    }
+                }
 						
-						div(class="extra"){
-							div(class="ui green label"){Out(item.serial);}
-							div(class="ui label"){Out(item.deviceType.name);}
-							
-							
-							a(class="ui right floated labeled mini orange icon button", href="{{request.contextPath}}/device/edit/" + item.id){
-								i(class="ui sign in icon");
-								Out("Edit");
-							}		
-						}
-					}					
-				}				
 			}				
 					
-			a(href="/device/add", class="ui button"){"Add device";}
+			a(href="/device/add", class="btn btn-primary btn-sm"){"Add device";}
 		}
 				
 	}

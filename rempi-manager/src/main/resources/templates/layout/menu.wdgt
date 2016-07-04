@@ -1,44 +1,28 @@
-div(class="horizontal basic ui segment"){
+div(class="panel panel-default"){
 	
-	div(class="ui vertical pointing menu"){
-		 div(class="item"){
-			 Out("Welcome {{request.remoteUser}}!");
-		 }
-	   div(class="item"){
+        div(class="panel-heading"){
+    		 Out("Welcome {{request.remoteUser}}!");
+    	 }
+   div(class="list-group") {
+       
+	   div(class="list-group-item"){
 	      div(class="ui input"){
 	         "input"(type="text", placeholder="Search...");
 	      }
 	   }
 	
-	   a(class="item"){
+	   a(class="list-group-item", href="/"){
 	      i(class="home icon"); 
 	      Out("Home");      
 	   }
-	   div(class="item"){
-	      i(class="cubes icon"); 
-	      Out("Devices");
-	      div(class="menu"){    
-	      	a(class="item", href=request.contextPath + "/device"){Out("List");}
-	         a(class="item", href=request.contextPath + "/device/add"){Out("Add");}         
-	      }
-	   }
-	   div(class="item"){
-	      i(class="cubes icon"); 
-	      Out("Device types");
-	      div(class="menu"){    
-	      	a(class="item", href=request.contextPath + "/admin/deviceType"){Out("List");}
-	         a(class="item", href=request.contextPath + "/admin/deviceType/add"){Out("Add");}         
-	      }
-	   }
-	   div(class="item"){
-	      i(class="user icon"); 
-	      Out("Users");
-	      div(class="menu"){    
-	      	a(class="item", href=request.contextPath + "/admin/user"){Out("List");}
-	         a(class="item", href=request.contextPath + "/admin/user/add"){Out("Add");}         
-	      }
-	   }
-	   a(class="item", href= contextPath + "/logout"){
+	   
+      	a(class="list-group-item", href=request.contextPath + "/device"){Out("Devices");}
+	  
+      	a(class="list-group-item", href=request.contextPath + "/admin/deviceType"){Out("Device type");}
+    
+      	a(class="list-group-item", href=request.contextPath + "/admin/user"){Out("Users");}
+	         
+	   a(class="list-group-item", href= contextPath + "/logout"){
 	      i(class="key icon"); 
 	      Out("Logout");      
 	   }

@@ -15,19 +15,26 @@ import com.landasource.wiidget.io.FileLoader;
 @Component
 public class SpringWiidgetConfiguration extends DefaultConfiguration {
 
-	@Autowired
-	private SpringWiidgetFileLoader fileLoader;
+    @Autowired
+    private SpringWiidgetFileLoader fileLoader;
 
-	@Autowired
-	private SpringClassLoader classLoader;
+    @Autowired
+    private SpringClassLoader classLoader;
 
-	@Override
-	public FileLoader getFileLoader() {
-		return fileLoader;
-	}
+    public SpringWiidgetConfiguration() {
+        super();
+        //        addTransformRule(Transformers.create().match(RawWiidget.class).attr("class", "item", "list-group-item").build());
+        //        addTransformRule(Transformers.create().match(RawWiidget.class).attr("class", "menu", "list-group").build());
+    }
 
-	@Override
-	public ClassLoader getClassLoader() {
-		return classLoader;
-	}
+    @Override
+    public FileLoader getFileLoader() {
+        return fileLoader;
+    }
+
+    @Override
+    public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+
 }

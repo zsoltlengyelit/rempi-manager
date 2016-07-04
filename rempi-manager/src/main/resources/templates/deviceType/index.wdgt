@@ -19,11 +19,11 @@ Template("templates/layout/main.html"){
 					
 					span(class="btn-group"){
 						
-						a(class="ui labeled mini orange icon button", href="{{request.contextPath}}/admin/deviceType/edit/{{item.id}}"){
+						a(class="btn btn-info btn-sm", href="{{request.contextPath}}/admin/deviceType/edit/{{item.id}}"){
 							i(class="ui sign in icon");
 							Out("Edit");
 						}		
-						a(href="/admin/deviceType/delete/" + item.id , class="ui labeled mini red icon button", onclick="return confirm('Sure?');"){
+						a(href="/admin/deviceType/delete/" + item.id , class="btn btn-sm btn-danger", onclick="return confirm('Sure?');"){
 							i(class="ui trash icon");
 							"Delete";
 						}
